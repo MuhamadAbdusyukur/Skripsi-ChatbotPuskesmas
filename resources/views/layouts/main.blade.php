@@ -1353,7 +1353,7 @@ body.chatbot-open::before {
 <div id="chatbot-container" class="chatbot-container" style="display: none;">
     <div class="chatbot-header">
     <div class="profile">
-        <img src="/home/img/Logo Chatbot.svg" alt="Avatar" class="profile-avatar">
+        <img src="{{ asset('home/img/Logo Chatbot.svg') }}" alt="Avatar" class="profile-avatar">
         <span class="profile-name">ChatBot Puskesmas</span>
     </div>
     <button id="closeChatBtn" class="chat-close-btn">
@@ -1418,8 +1418,7 @@ function appendMessage(sender, content) {
         // Tambahkan avatar untuk pesan bot
         const avatar = document.createElement('img');
         avatar.classList.add('bot-avatar');
-        avatar.src = '/home/img/Logo Chatbot.svg'; // Path gambar Anda
-        
+        avatar.src = 'https://puskesmasbanjarwangi.site//public/home/img/Logo Chatbot.svg';
         const textContent = document.createElement('div');
         textContent.classList.add('bot-text');
         

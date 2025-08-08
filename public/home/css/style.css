@@ -1275,3 +1275,47 @@ width: 100%;
 #biaya_pelayanan {
     scroll-margin-top: 15vh; /* Atur jaraknya di sini, misalnya 100px */
 }
+
+
+/* CSS untuk dropdown menu yang lebih profesional */
+.nav-item.dropdown .dropdown-menu {
+    border-radius: 8px; /* Sudut tumpul yang lembut */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih jelas */
+    padding: 8px 0;
+    margin-top: 10px !important; /* Jarak dari navbar */
+    border: none;
+    animation: fadeIn 0.3s ease-out forwards; /* Animasi fade-in */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-item.dropdown .dropdown-menu li {
+    list-style: none; /* Menghilangkan bullet point */
+}
+
+.nav-item.dropdown .dropdown-menu .dropdown-item {
+    font-size: 15px; /* Ukuran font yang pas */
+    font-weight: 500;
+    color: #333; /* Warna teks gelap */
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+    border-radius: 6px;
+    margin: 0 8px; /* Margin horizontal */
+    white-space: nowrap; /* Mencegah teks terpotong */
+}
+
+.nav-item.dropdown .dropdown-menu .dropdown-item:hover,
+.nav-item.dropdown .dropdown-menu .dropdown-item:focus {
+    background-color: #e9f5ff; /* Warna biru muda saat hover */
+    color: #007bff; /* Warna teks biru */
+    outline: none;
+}
