@@ -3,13 +3,22 @@
 
     // Spinner
     var spinner = function () {
-        setTimeout(function () {
-            if ($('#spinner').length > 0) {
-                $('#spinner').removeClass('show');
-            }
-        }, 1);
+        var $spinner = $('#spinner'); // Ambil elemen spinner menggunakan ID
+        if ($spinner.length > 0) {
+            // Ambil durasi dari atribut data-loading-duration di elemen HTML.
+            // parseInt() mengubah string menjadi angka.
+            // || 1; digunakan sebagai fallback jika atribut tidak ada atau tidak valid,
+            // sehingga spinner tetap menghilang setelah 1 milidetik.
+            var duration = parseInt($spinner.data('loading-duration')) || 1; 
+
+            // Atur waktu tunda (timeout) untuk menyembunyikan spinner
+            setTimeout(function () {
+                $spinner.removeClass('show'); // Hapus kelas 'show' untuk menyembunyikan spinner
+            }, duration); // Gunakan durasi yang diambil dari atribut data
+        }
     };
-    spinner();
+    spinner(); // Panggil fungsi spinner ini segera setelah JavaScript dimuat
+
     
     
     // Back to top button

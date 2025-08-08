@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="telepon" name="telepon" placeholder="Telepon" value="{{ old('telepon') }}" required>
+                                    <input type="number" class="form-control @error('telepon') is-invalid @enderror" id="telepon" name="telepon" placeholder="Telepon" value="{{ old('telepon') }}" required>
                                     <label for="telepon">Telepon</label>
                                     @error('telepon')
                                     <span class="invalid-feedback" role="alert">
@@ -55,17 +55,20 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating">
-                                    <div class="date" id="tgl_kunjung" data-target-input="nearest">
-                                        <input type="date" class="form-control @error('tgl_kunjung') is-invalid @enderror" id="tgl_kunjung" name="tgl_kunjung" placeholder="Tanggal Kunjungan"style="height: 43px;" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ old('tgl_kunjung') }}" required>
-                                        @error('tgl_kunjung')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
+    <div class="form-floating">
+        {{-- Hapus div date yang tidak perlu --}}
+        <input type="date" class="form-control @error('tgl_kunjung') is-invalid @enderror" id="tgl_kunjung_input" name="tgl_kunjung" placeholder="Tanggal Kunjungan" style="height: 60px;" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ old('tgl_kunjung') }}" required>
+        
+        {{-- Ini untuk label, gunakan 'for' yang benar --}}
+        <label for="tgl_kunjung_input">Tanggal Kunjungan</label>
+        
+        @error('tgl_kunjung')
+        <span class="invalid-feedback" role="alert">
+            {{ $message }}
+        </span>
+        @enderror
+    </div>
+</div>
                             <div class="col-12">
                                 <div class="form-floating">
                                     <select name="poli_id" id="poli_id" class="form-select border-0 @error('poli_id') is-invalid @enderror" style="height: 55px;" required>

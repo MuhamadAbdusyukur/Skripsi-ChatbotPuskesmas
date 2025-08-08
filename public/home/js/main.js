@@ -57,18 +57,28 @@
 
 
     // Header carousel
-    $(".header-carousel").owlCarousel({
-        autoplay: false,
-        animateOut: 'fadeOutLeft',
-        items: 1,
-        dots: true,
-        loop: true,
-        nav : true,
-        navText : [
-            '<i class="bi bi-chevron-left"></i>',
-            '<i class="bi bi-chevron-right"></i>'
-        ]
-    });
+// Header carousel
+$(".header-carousel").owlCarousel({
+    autoplay: true,
+    autoplayTimeout: 3000,    // Tetap 5 detik, bisa disesuaikan
+    smartSpeed: 1000,         // <-- PENTING: Kecepatan transisi slide (1 detik)
+    autoplayHoverPause: true,
+    items: 1,
+    loop: true,               // Pastikan ini TRUE
+    dots: true,
+    nav : true,
+    navText: ["", ""], // Baris ini akan menyembunyikan teks bawaan
+
+    
+
+    // Hapus animateOut dan animateIn jika Anda mengalami stuttering/lompatan.
+    // Owl Carousel biasanya akan menggunakan transisi default-nya
+    // yang lebih mulus untuk looping.
+    // Jika Anda tetap ingin animasi kustom, coba 'fadeOut' dan 'fadeIn' saja
+    // tanpa 'Left' atau 'Right' untuk permulaan.
+    // animateOut: 'fadeOut', // Coba komen ini dulu
+    // animateIn: 'fadeIn'    // Coba komen ini dulu
+});
 
 
     // Testimonials carousel

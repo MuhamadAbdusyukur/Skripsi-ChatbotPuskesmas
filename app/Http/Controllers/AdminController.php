@@ -9,17 +9,47 @@ use App\Models\Pengunjung;
 use App\Models\Poli;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Article;
+// use PDF; // Pastikan ini ada di atas
+use Barryvdh\DomPDF\Facade\Pdf; // Tambahkan ini jika belum ada
 
 class AdminController extends Controller
 {
     // DATA PENDAFTARAN
-    public function index()
+    public function index(Request $request) // PERUBAHAN: Menambahkan parameter Request $request
     {
         $user = Auth::user();
-        $datas = Pengunjung::with('poli')->get();
+        // === TAMBAHKAN KODE UNTUK MENGHITUNG ROLE DI SINI ===
+    $totalJenisRole = User::distinct('role')->count();
+    $daftarRole = User::select('role')->distinct()->pluck('role');
+    // dd($totalJenisRole); 
 
-        return view('admin.index', [
-            "title" => "Beranda"], compact('user', 'datas'));
+        // ================================================================
+        // MODIFIKASI: LOGIKA PENCARIAN & PAGINASI UNTUK DATAS
+        // ================================================================
+        $search = $request->input('search'); // PENAMBAHAN: Tangkap parameter 'search'
+
+        $query = Pengunjung::query(); // Inisialisasi query builder
+        $query->with('poli'); // Eager load relasi 'poli' untuk efisiensi
+
+        if ($search) { // PENAMBAHAN: Logika filter jika ada input pencarian
+            $query->where('nik', 'LIKE', '%' . $search . '%')
+                  ->orWhere('nama', 'LIKE', '%' . $search . '%')
+                  ->orWhere('alamat', 'LIKE', '%' . $search . '%')
+                  ->orWhere('telepon', 'LIKE', '%' . $search . '%')
+                  ->orWhere('tgl_kunjung', 'LIKE', '%' . $search . '%'); // Pencarian tanggal sebagai string
+                  
+            // Tambahkan pencarian berdasarkan nama poli (melalui relasi)
+            // Penting: Pastikan relasi 'poli' sudah didefinisikan di model Pengunjung
+            $query->orWhereHas('poli', function($q) use ($search){
+                $q->where('nama', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        // PERUBAHAN: Ganti ->get() dengan ->paginate() dan tambahkan withQueryString()
+        $datas = $query->latest()->paginate(10)->appends(request()->query()); // Urutkan dari yang terbaru (opsional)
+
+        return view('admin.index', array_merge(["title" => "Beranda"], compact('user', 'datas', 'totalJenisRole', 'daftarRole')));
     }
 
     public function datacreate()
@@ -92,22 +122,103 @@ class AdminController extends Controller
     {
         Pengunjung::destroy($id);
 
-        return redirect()->route('admin')->with('success', 'Data Pendaftaran Pasien Berhasil Dihapus');
+        return redirect()->route('admin.dokter.index')->with('success', 'Data Pendaftaran Pasien Berhasil Dihapus');
     }
 
-    // LAPORAN PENGUNJUNG
-    public function laporan()
+    // DATA PENGUNJUNG
+    public function laporan(Request $request)
     {
         $user = Auth::user();
 
-        // PENGUNJUNG BERDASARKAN TANGGAL
-        $datatgl = Pengunjung::selectRaw('tgl_kunjung, COUNT(*) as kunjungan_tgl')
-        ->groupBy('tgl_kunjung')
-        ->orderBy('tgl_kunjung')
-        ->get();
+        // ================================================================
+        // MODIFIKASI: LOGIKA PENCARIAN & PAGINASI UNTUK DATA TANGGAL ($datatgl)
+        // ================================================================
+        $searchDate = $request->input('search_date');
 
-        // PENGUNJUNG BERDASARKAN POLI
-        $datapoli = Poli::withCount('pengunjung')->get();
+        $queryTgl = Pengunjung::selectRaw('tgl_kunjung, COUNT(*) as kunjungan_tgl')
+                                ->groupBy('tgl_kunjung')
+                                ->orderBy('tgl_kunjung', 'desc');
+
+        if ($searchDate) {
+            $dateParsed = null;
+            
+            // 1. Coba parsing sebagai tanggal YYYY-MM-DD (contoh: 2025-07-20)
+            try {
+                $dateParsed = Carbon::createFromFormat('Y-m-d', $searchDate);
+            } catch (\Exception $e) { /* Lanjutkan ke pengecekan berikutnya */ }
+            
+            // 2. *** PERBAIKAN: Coba parsing sebagai tanggal DD-MM-YYYY (contoh: 20-07-2025) ***
+            if (!$dateParsed) {
+                try {
+                    $dateParsed = Carbon::createFromFormat('d-m-Y', $searchDate);
+                } catch (\Exception $e) { /* Lanjutkan ke pengecekan berikutnya */ }
+            }
+
+            // 3. Coba parsing sebagai Hari Bulan Tahun (contoh: 20 Juli 2025)
+            if (!$dateParsed) {
+                try {
+                    $dateParsed = Carbon::createFromFormat('d F Y', $searchDate, 'id');
+                } catch (\Exception $e) { /* Lanjutkan ke pengecekan berikutnya */ }
+            }
+
+            // 4. Coba parsing sebagai Hari Bulan (contoh: 20 Juli)
+            if (!$dateParsed) {
+                try {
+                    $dateParsed = Carbon::createFromFormat('d F', $searchDate, 'id');
+                } catch (\Exception $e) { /* Lanjutkan ke pengecekan terakhir */ }
+            }
+
+            if ($dateParsed && $dateParsed->isValid()) {
+                // Jika salah satu dari 4 format tanggal di atas berhasil, terapkan filter whereDate
+                $queryTgl->whereDate('tgl_kunjung', $dateParsed->toDateString());
+            } else {
+                // 5. Fallback: Jika tidak dikenali sebagai tanggal, coba cari berdasarkan nama bulan
+                $monthNames = [
+                    'januari' => 1, 'februari' => 2, 'maret' => 3, 'april' => 4, 'mei' => 5, 'juni' => 6,
+                    'juli' => 7, 'agustus' => 8, 'september' => 9, 'oktober' => 10, 'november' => 11, 'desember' => 12,
+                    'jan' => 1, 'feb' => 2, 'mar' => 3, 'apr' => 4, 'may' => 5, 'jun' => 6,
+                    'jul' => 7, 'aug' => 8, 'sep' => 9, 'oct' => 10, 'nov' => 11, 'dec' => 12,
+                ];
+
+                $lowerSearch = strtolower($searchDate);
+                $monthNumber = null;
+
+                foreach ($monthNames as $name => $number) {
+                    if (str_contains($lowerSearch, $name)) {
+                        $monthNumber = $number;
+                        break;
+                    }
+                }
+
+                if ($monthNumber) {
+                    $queryTgl->whereMonth('tgl_kunjung', $monthNumber);
+                    if (preg_match('/\d{4}/', $searchDate, $matches)) {
+                        $queryTgl->whereYear('tgl_kunjung', $matches[0]);
+                    }
+                } else {
+                    $queryTgl->where('tgl_kunjung', 'LIKE', '%' . $searchDate . '%');
+                }
+            }
+        }
+
+        $datatgl = $queryTgl->paginate(10)->withQueryString();
+
+        // ================================================================
+        // MODIFIKASI: LOGIKA PENCARIAN & PAGINASI UNTUK DATA POLI ($datapoli)
+        // ================================================================
+        $searchPoli = $request->input('search_poli');
+
+        $queryPoli = Poli::select('polis.id', 'polis.nama')
+                          ->selectRaw('COUNT(pengunjungs.id) as pengunjung_count')
+                          ->leftJoin('pengunjungs', 'polis.id', '=', 'pengunjungs.poli_id')
+                          ->groupBy('polis.id', 'polis.nama')
+                          ->orderBy('pengunjung_count', 'desc');
+
+        if ($searchPoli) {
+            $queryPoli->where('polis.nama', 'LIKE', '%' . $searchPoli . '%');
+        }
+
+        $datapoli = $queryPoli->paginate(10)->withQueryString();
 
         return view('admin.laporan', [
             "title" => "Data Pengunjung"], compact('user', 'datatgl', 'datapoli'));
@@ -189,26 +300,31 @@ class AdminController extends Controller
     public function userindex()
     {
         $user = Auth::user();
-        $admin = User::all();
+        // Ambil hanya pengguna dengan peran 'admin' atau 'super_admin'
+        $admin = User::whereIn('role', ['admin', 'super_admin'])->get();
 
         return view('admin.user.index', [
             "title" => "Daftar Pengguna"], compact('user', 'admin'));
     }
 
     public function userstore(Request $request)
-    {
-        $validate = $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required',
-        ]);
+{
+    // --- PERBAIKAN: Simpan hasil validasi ke variabel ---
+    $validatedData = $request->validate([ // Simpan hasil validasi ke variabel $validatedData
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email',
+        'password' => 'required|string|min:8',
+        'role' => 'required|string|in:admin,super_admin',
+    ]);
+    // ---------------------------------------------------
 
-        $validate['password'] = bcrypt($validate['password']);
+    $validatedData['password'] = bcrypt($validatedData['password']); // Gunakan $validatedData untuk password
+    
+    User::create($validatedData); // Gunakan $validatedData untuk membuat user
 
-        User::create($validate);
 
-        return redirect('/admin/user')->with('success', 'Admin Berhasil Ditambahkan');
-    }
+    return redirect('/admin/user')->with('success', 'Pengguna berhasil ditambahkan!');
+}
 
     public function useredit($id)
     {
@@ -246,4 +362,70 @@ class AdminController extends Controller
 
         return redirect('/admin/user')->with('success', 'Admin Berhasil Dihapus');
     }
+
+    // ARTICLE
+    public function article()
+    {
+        // Ambil 3 artikel terbaru yang sudah dipublikasi
+        $articles = Article::whereNotNull('published_at')
+                            ->orderByDesc('published_at')
+                            ->take(3)
+                            ->get();
+
+        return view('/admin', compact('articles'));
+    }
+
+
+    // PDF BERDASARKAN TANGGAL
+    public function downloadPdfTanggal($tanggal)
+{
+    // Ambil data pengunjung berdasarkan tanggal
+    $dataPengunjung = Pengunjung::whereDate('tgl_kunjung', $tanggal)
+                                ->with('poli')
+                                ->get();
+    
+    // Tentukan nama file PDF
+    $pdfFileName = 'laporan-pengunjung-tanggal-' . $tanggal . '.pdf';
+
+    // Kirim data ke view untuk PDF
+    $data = [
+        'dataPengunjung' => $dataPengunjung,
+        'tgl_kunjung' => $tanggal,
+    ];
+
+    // Render view ke PDF
+    $pdf = PDF::loadView('admin.laporan_pdf', $data);
+
+    // Kembalikan file PDF sebagai respons download
+    return $pdf->download($pdfFileName);
+}
+
+// PDF BERDASARKAN POLI
+public function downloadPdfPoli($id)
+{
+    // Ambil data pengunjung berdasarkan ID Poli
+    $dataPengunjung = Pengunjung::where('poli_id', $id)
+                                ->with('poli')
+                                ->get();
+    
+    // Ambil nama poli untuk judul laporan
+    $poli = Poli::findOrFail($id);
+
+    // Tentukan nama file PDF
+    $pdfFileName = 'laporan-pengunjung-poli-' . $poli->nama . '.pdf';
+
+    // Kirim data ke view untuk PDF
+    $data = [
+        'dataPengunjung' => $dataPengunjung,
+        'poli' => $poli,
+    ];
+
+    // Render view ke PDF
+    $pdf = PDF::loadView('admin.laporan_poli_pdf', $data);
+
+    // Kembalikan file PDF sebagai respons download
+    return $pdf->download($pdfFileName);
+}
+
+
 }

@@ -1,18 +1,34 @@
 /********** Template CSS **********/
 :root {
-    --primary: #009CFF;
-    --light: #F3F6F9;
-    --dark: #191C24;
+--primary: #0463FA;
+--light: #EFF5FF;
+--dark: #1B2C51;
+}
+
+.fw-medium {
+font-weight: 500 !important;
+}
+
+.fw-bold {
+font-weight: 700 !important;
+}
+
+.fw-black {
+font-weight: 900 !important;
 }
 
 .back-to-top {
-    position: fixed;
-    display: none;
-    right: 45px;
-    bottom: 45px;
-    z-index: 99;
+position: fixed;
+display: none;
+right: 45px;
+bottom: 45px;
+z-index: 99;
 }
 
+/*** Warna dasar ***/
+.btn-primary {
+    color: #FFFFFF;     /* Mengambil warna hijau dari variabel */
+}
 
 /*** Spinner ***/
 #spinner {
@@ -275,3 +291,347 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/* Styling untuk gambar ikon logo */
+.puskesmas-logo-icon {
+    width: 170px; /* Sesuaikan lebar gambar logo sesuai kebutuhan Anda */
+    height: auto; /* Biarkan tinggi menyesuaikan aspek rasio gambar */
+}
+
+/* Penyesuaian Responsif untuk Logo (Opsional) */
+@media (max-width: 575.98px) {
+    .puskesmas-logo-icon {
+        width: 170px; /* Sesuaikan ukuran gambar logo di layar kecil */
+    }
+}
+
+
+/* TABEL INDEX */
+
+/* 1. Atur ukuran font dasar untuk mobile */
+    @media (max-width: 767.98px) {
+        body {
+            font-size: 0.875rem; /* Font size lebih kecil dari default 1rem */
+        }
+        .h6, h6 {
+            font-size: 1.1rem; /* Sesuaikan ukuran heading */
+        }
+        .btn {
+            font-size: 0.875rem; /* Ukuran tombol lebih kecil */
+        }
+        .form-control {
+            font-size: 0.875rem; /* Ukuran input form lebih kecil */
+        }
+        .card-text {
+            font-size: 0.875rem; /* Ukuran teks di card */
+        }
+        .card-title {
+            font-size: 1rem; /* Ukuran judul card */
+        }
+    }
+
+    /* 2. Styling Form Pencarian yang Responsif */
+    .my-search-form {
+        max-width: 500px; /* Batasi lebar form di desktop */
+    }
+
+    .my-search-input {
+        width: 100%; /* Buat input memenuhi lebar form */
+    }
+
+    @media (max-width: 767.98px) {
+        .responsive-search-container {
+            justify-content: center !important; /* Pusatkan form di mobile */
+        }
+        .my-search-form {
+            flex-direction: column; /* Ubah tata letak jadi kolom */
+            width: 100%;
+            max-width: 100%;
+        }
+        .my-search-input {
+            margin-right: 0 !important; /* Hapus margin kanan */
+            margin-bottom: 8px; /* Beri jarak bawah */
+        }
+        .my-search-form .btn {
+            width: 100%; /* Buat tombol full-width */
+            margin-left: 0 !important; /* Hapus margin kiri */
+        }
+        .my-search-form .ms-2 {
+            margin-top: 5px; /* Beri jarak atas untuk tombol Reset */
+        }
+    }
+
+
+    /* 3. Styling untuk Tampilan Card Mobile */
+    @media (max-width: 767.98px) {
+        /* ... (CSS ukuran font, dll.) ... */
+        
+        .responsive-data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Jarak antar baris data */
+        }
+        
+        .data-item {
+            display: flex;
+            align-items: baseline; /* Ini yang membuat indentasi! */
+            gap: 5px; /* Jarak antara label dan value */
+        }
+        
+        .data-label {
+            flex-shrink: 0;
+            width: 90px; /* Sesuaikan lebar label. 90px terlihat pas untuk "JENIS POLI:" */
+            text-align: left;
+        }
+
+        .data-value {
+            flex-grow: 1;
+            flex-basis: 0; /* Penting agar wrap berfungsi dengan baik */
+        }
+    }
+
+
+/* PROFIL */
+@media (max-width: 767.98px) {
+    /* Ukuran untuk mobile */
+    .nav-link img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Ukuran untuk desktop */
+    .nav-link img {
+        width: 40px;
+        height: 40px;
+    }
+}
+@media (max-width: 767.98px) {
+    .dropdown-menu.dropdown-menu-end {
+        /* Lebarkan menu agar mudah disentuh */
+        min-width: 150px; 
+        /* Atur posisi agar tidak terlalu jauh dari tombol profil */
+        right: 15px !important; 
+        left: auto !important;
+        /* Berikan border-radius agar tidak kaku */
+        border-radius: 8px !important; 
+        /* Berikan sedikit bayangan */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    }
+
+    .dropdown-menu .dropdown-item {
+        /* Tambah padding agar tombol lebih besar dan mudah disentuh */
+        padding: 12px 20px;
+        /* Ukuran font lebih besar */
+        font-size: 0.95rem;
+    }
+}
+
+/* LAPORAN */
+ /* Styling Form Pencarian yang Responsif */
+    .my-search-form {
+        max-width: 350px;
+    }
+
+    @media (max-width: 767.98px) {
+        .responsive-search-container {
+            justify-content: center !important;
+        }
+        .my-search-form {
+            flex-direction: column;
+            width: 100%;
+            max-width: 100%;
+        }
+        .my-search-input {
+            margin-right: 0 !important;
+            margin-bottom: 8px;
+        }
+        .my-search-form .btn {
+            width: 100%;
+            margin-left: 0 !important;
+        }
+        .my-search-form .ms-2 {
+            margin-top: 5px;
+        }
+    }
+
+    /* * Tampilan Tabel Bertumpuk untuk Mobile
+     */
+    @media (max-width: 991.98px) {
+        /* Sembunyikan header tabel di mobile */
+        .responsive-stack-table thead,
+        .responsive-stack-table th {
+            display: none;
+        }
+        
+        /* Buat setiap baris dan sel menjadi blok */
+        .responsive-stack-table,
+        .responsive-stack-table tbody,
+        .responsive-stack-table td,
+        .responsive-stack-table tr {
+            display: block;
+            width: 100%;
+        }
+
+        /* Styling setiap baris data */
+        .responsive-stack-table tr {
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Styling setiap sel (kolom) */
+        .responsive-stack-table td {
+            border-bottom: none;
+            text-align: right;
+            padding-left: 50%; /* Beri ruang untuk label */
+            position: relative;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        /* Tampilkan label dari data-label */
+        .responsive-stack-table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            width: calc(50% - 20px);
+            text-align: left;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        /* Atur padding dan font untuk tampilan mobile */
+        body, .btn, .form-control, .card-text {
+            font-size: 0.875rem;
+        }
+        .nav-tabs .nav-link {
+            font-size: 0.8rem;
+            padding: 10px;
+            text-align: center;
+        }
+    }
+
+
+    
+/* Styling untuk tab yang BELUM di-klik (Inactive) */
+    .nav-tabs .nav-link:not(.active) {
+        color: #000 !important; /* Warna teks menjadi hitam */
+        border-color: transparent !important; /* Opsional: Hilangkan border */
+        background-color: transparent !important; /* Background transparan */
+    }
+
+    /* Styling untuk tab yang SUDAH di-klik (Active) */
+    .nav-tabs .nav-link.active {
+        color: #0d6efd !important; /* Warna teks menjadi biru (Bootstrap primary blue) */
+        font-weight: 500; /* Opsional: sedikit menebalkan teks */
+        background-color: #fff !important; /* Background putih */
+    }
+
+    /* Styling saat di-hover (mouse diarahkan) */
+    .nav-tabs .nav-link:hover {
+        color: #0d6efd; /* Teks berubah menjadi biru saat di-hover */
+    }
+
+    @media (max-width: 767.98px) {
+        /* Mengurangi padding pada container utama di mobile */
+        .container-fluid {
+            padding-left: 10px !important; /* Padding kiri-kanan lebih kecil */
+            padding-right: 10px !important;
+            padding-top: 10px !important; /* Padding atas lebih kecil */
+        }
+
+        /* Mengurangi padding di dalam kotak konten (bg-light) */
+        .bg-light.rounded.h-100.p-4 {
+            padding: 10px !important; /* Mengurangi padding internal */
+        }
+        /* Tambahan: Mengatur ukuran font heading di mobile */
+.bg-light h6 {
+    font-size: 1rem !important; /* Ukuran h6 lebih kecil di mobile, dari default 1.5rem */
+}
+    }
+
+
+
+    body { font-family: sans-serif; }
+    
+    /* * CSS untuk HEADER (tabel 3 kolom) - TANPA GARIS
+     */
+    table.header-table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        border: none; /* Hilangkan border pada tabel header */
+        margin-bottom: 10px; 
+    }
+    .header-table td { 
+        padding: 0; 
+        border: none; /* Hilangkan border pada sel (kolom) di header */
+    }
+    
+    /* * CSS untuk TABEL DATA - DENGAN GARIS
+     */
+    table.data-table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        margin-top: 20px; 
+    }
+    .data-table, .data-table th, .data-table td { 
+        border: 1px solid black; /* Berikan border HANYA pada tabel data */
+    }
+    .data-table th, .data-table td { 
+        padding: 8px; 
+        text-align: left; 
+        font-size: 10px; 
+    }
+    .data-table th { 
+        background-color: #f2f2f2; 
+    }
+
+
+
+
+    /* Custom CSS untuk PADDING KONTEN UTAMA SAJA */
+
+/* Padding untuk container utama konten */
+.main-content-container {
+    padding-left: 1px; /* Padding kiri-kanan desktop */
+    padding-right: 1px;
+    padding-top: 1px;   /* Padding atas desktop */
+}
+
+/* Padding internal untuk box konten (bg-light) */
+.main-card-padding {
+    padding: 24px; /* Padding internal desktop */
+}
+
+/* Penyesuaian padding untuk layar mobile */
+@media (max-width: 767.98px) {
+    .main-content-container {
+        padding-left: 1px !important; /* Mobile padding - DITAMBAHKAN !important */
+        padding-right: 1px !important;
+        padding-top: 1px !important;   /* Mobile padding - DITAMBAHKAN !important */
+    }
+    
+    .main-card-padding {
+        padding: 15px !important; /* Internal padding for mobile - DITAMBAHKAN !important */
+    }
+    
+    /* Netralkan row/col padding di mobile juga (jika belum aktif) */
+    .main-content-container > .row {
+        margin-left: 0 !important; 
+        margin-right: 0 !important;
+    }
+    .main-content-container .row > [class*="col"] {
+        padding-left: 0 !important; 
+        padding-right: 0 !important;
+    }
+    /* Opsional: Aturan font dan h6 yang sudah ada */
+    body { font-size: 0.85rem; }
+    h6 { font-size: 1rem !important; } 
+}
+
+

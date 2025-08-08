@@ -1,9 +1,13 @@
 /********** Template CSS **********/
 :root {
-    --primary: #0463FA;
-    --light: #EFF5FF;
-    --dark: #1B2C51;
-}
+            --bs-primary: rgb(15, 138, 76); /* Menggunakan nuansa hijau baru */
+            --bs-light: #d4edda;            /* Warna hijau terang (bisa disesuaikan jika perlu) */
+            --bs-dark: #1B2C51;             /* Warna dark Anda */
+            --primary: rgb(15, 138, 76);    /* Opsional: tetap definisikan ini juga, selaraskan dengan --bs-primary */
+            --light: #d4edda;               /* Opsional: tetap definisikan ini juga, selaraskan dengan --bs-light */
+            --dark: #1B2C51;                /* Opsional: tetap definisikan ini juga, selaraskan dengan --bs-dark */
+            --bs-success: rgb(15, 138, 76); /* Bisa diset sama dengan primary Anda, atau nuansa lain */
+        }
 
 .fw-medium {
     font-weight: 500 !important;
@@ -47,9 +51,115 @@
     transition: .5s;
 }
 
-.btn.btn-primary,
+.bg-primary {
+            background-color: var(--bs-primary) !important; /* <--- PASTIKAN ADA !important DI SINI */
+        }
+
+.btn.btn-primary { /* Menggunakan selektor lebih spesifik (.btn.btn-primary) */
+    color: #FFFFFF; /* Warna teks tetap putih */
+    background-color: var(--primary); /* Mengambil warna hijau dari variabel */
+    border-color: var(--primary);     /* Mengambil warna hijau dari variabel */
+}
+
+/* Pastikan juga untuk mengatur hover state agar interaktif */
+.btn.btn-primary:hover {
+            background-color: rgb(12, 110, 60) !important; /* Nuansa hijau sedikit lebih gelap untuk hover */
+            border-color: rgb(12, 110, 60) !important;
+        }
+
+i.text-primary { /* Hanya menargetkan elemen <i> (ikon) dengan kelas text-primary */
+            color: var(--bs-primary) !important; /* <--- Diubah menjadi warna hijau Anda */
+        }
+
+/* PERUBAHAN DI SINI: Mengubah warna link navigasi */
+        .navbar-nav .nav-link:hover { /* Hanya untuk HOVER */
+            color: #0463FA !important; /* Warna BIRU saat di-hover */
+        }
+        .navbar-nav .nav-link.active { /* Hanya untuk ACTIVE / sudah diklik */
+            color: var(--bs-primary) !important; /* Warna HIJAU PRIMARY saat aktif */
+            font-weight: bold !important; /* TAMBAHKAN INI: Membuat teks menjadi tebal */
+             position: relative; /* PENTING: Ini membuat posisi absolut di dalamnya berfungsi */
+    padding-bottom: 25px; /* PENTING: Menambahkan ruang di bawah teks untuk indikator */
+        }
+
+.navbar-nav .nav-link.active .active-indicator {
+    position: absolute; /* Mengeluarkan indikator dari alur normal dokumen */
+    bottom: 10px; /* Memposisikan indikator 5px dari bawah tautan */
+    left: 50%; /* Memposisikan indikator di tengah secara horizontal */
+    transform: translateX(-50%); /* Menyesuaikan posisi agar benar-benar di tengah */
+    color: #00B900; /* Warna ikon segitiga (sesuai dengan teks aktif) */
+    font-size: 0.9em; /* Ukuran ikon segitiga (bisa disesuaikan) */
+}
+
+        
+ /* PERUBAHAN BARU DI SINI: Memastikan tombol Read More tetap biru saat diklik/aktif/fokus */
+        .btn-readmore-responsive.btn-primary {
+    background-color: #0463FA !important; /* Anda minta ini BIRU sebagai default */
+    border-color: #0463FA !important;
+}
+
+/* Opsional: Untuk transisi yang lebih halus saat state berubah */
+.navbar-nav .nav-link {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-readmore-responsive.btn-primary:active,
+.btn-readmore-responsive.btn-primary:focus {
+    background-color: #0463FA !important; /* Anda minta ini BIRU saat diklik/fokus */
+    border-color: #0463FA !important;
+    box-shadow: 0 0 0 0.25rem rgba(4, 99, 250, 0.5) !important;
+}
+
+/* BARU: Mengatur tombol "Lihat Semua Artikel" menjadi biru dan responsif */
+        .btn-lihat-semua-artikel.btn-primary {
+            background-color: #0463FA !important; /* Warna biru untuk tombol ini */
+            border-color: #0463FA !important;
+            padding: 0.80rem 1rem; /* Padding default (mobile) */
+            font-size: 0.90rem;       /* Ukuran font default (mobile) */
+        }
+
+        .btn-lihat-semua-artikel.btn-primary:hover {
+            background-color: #0056b3 !important; /* Nuansa biru yang sedikit lebih gelap saat hover */
+            border-color: #0056b3 !important;
+        }
+
+        .btn-lihat-semua-artikel.btn-primary:active,
+        .btn-lihat-semua-artikel.btn-primary:focus {
+            background-color: #0463FA !important; /* Warna biru yang sama dengan default saat diklik/fokus */
+            border-color: #0463FA !important;
+            box-shadow: 0 0 0 0.25rem rgba(4, 99, 250, 0.5) !important;
+        }
+
+        /* Media queries untuk responsivitas ukuran tombol "Lihat Semua Artikel" */
+        @media (min-width: 576px) { /* Perangkat kecil (ponsel landscape, 576px ke atas) */
+            .btn-lihat-semua-artikel.btn-primary {
+                padding: 1rem 3rem; /* Padding lebih besar */
+                font-size: 1.1rem;   /* Ukuran font lebih besar */
+            }
+        }
+
+        @media (min-width: 768px) { /* Perangkat menengah (tablet, 768px ke atas) */
+            .btn-lihat-semua-artikel.btn-primary {
+                padding: 1.2rem 4rem; /* Padding lebih besar lagi */
+                font-size: 1.2rem;   /* Ukuran font lebih besar lagi */
+            }
+        }
+
+
+
+
+
+
+
 .btn.btn-secondary {
     color: #FFFFFF;
+    background-color: var(--dark); /* Misalnya, gunakan warna dark Anda untuk secondary */
+    border-color: var(--dark);
+}
+
+.btn.btn-secondary:hover {
+    background-color: #1a2642; /* Nuansa gelap yang sedikit lebih gelap untuk hover */
+    border-color: #1a2642;
 }
 
 .btn-square {
@@ -94,7 +204,7 @@
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 500;
-    text-transform: uppercase;
+    text-transform: capitalize;
     outline: none;
 }
 
@@ -150,95 +260,173 @@
 
 
 /*** Header ***/
-.header-carousel .owl-carousel-text {
-    position: absolute;
+/* Atur tinggi banner secara proporsional */
+.header-carousel {
+    height: 85vh; /* Mengatur tinggi carousel menjadi 60% dari tinggi viewport */
+    position: relative;
+    overflow: hidden;
+}
+
+.header-carousel .owl-carousel-item {
+width: 100%;
+    height: 100%; /* Memastikan item carousel mengisi tinggi 60vh */
+    position: relative;
+}
+
+.header-carousel .owl-carousel-item img {
     width: 100%;
     height: 100%;
-    padding: 3rem;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-shadow: 0 0 30px rgba(0, 0, 0, .1);
+    object-fit: cover; /* Gunakan 'cover' setelah gambar disesuaikan */
 }
 
+.header-carousel .owl-carousel-text {
+    position: absolute;
+    top: 10%; /* Mengatur posisi teks di 10% dari atas banner */
+    left: 50%; /* Menempatkan teks di tengah secara horizontal */
+    transform: translateX(-50%); /* Penyesuaian agar teks benar-benar di tengah */
+    text-align: center;
+    width: 100%;
+    padding: 0 3rem; /* Sesuaikan padding jika perlu */
+    z-index: 2; /* Pastikan teks berada di atas gambar */
+    /* Hapus aturan 'height: 100%', 'display: flex', 'align-items', dan 'justify-content'
+       karena kita sudah menggunakan 'position: absolute' dan 'top' */
+}
+
+.header-carousel .owl-carousel-text h1 {
+    font-size: 2.5rem; /* Mengurangi ukuran font agar lebih kecil */
+    /* Jika ingin lebih kecil lagi, turunkan nilai 2.5rem */
+}
+/* Aturan CSS khusus untuk layar mobile (lebar maksimal 768px) */
+@media (max-width: 768px) {
+    .header-carousel {
+        height: 100%; /* Contoh: Kurangi tinggi banner di mobile */
+    }
+    .header-carousel .owl-carousel-text h1 {
+        font-size: 1.5rem; /* Contoh: Perkecil ukuran font di mobile */
+    }
+}
+
+.header-carousel .owl-carousel-text h1.display-1 {
+    font-size: 2.5rem !important;
+}
+
+/* Menyembunyikan dot navigasi */
+.header-carousel .owl-dots {
+    display: none;
+}
+
+/* Mengatur posisi tombol panah */
 .header-carousel .owl-nav {
     position: absolute;
-    width: 200px;
-    height: 45px;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
+    padding: 0 15px;
 }
 
+/* Mengatur tampilan tombol panah */
 .header-carousel .owl-nav .owl-prev,
 .header-carousel .owl-nav .owl-next {
-    width: 45px;
-    height: 45px;
+    width: auto; /* Otomatis menyesuaikan lebar */
+    height: auto; /* Otomatis menyesuaikan tinggi */
+    background: transparent; /* Menghilangkan latar belakang lingkaran */
+    border: none; /* Menghilangkan border lingkaran */
+    color: #ffffff; /* Warna panah */
+    font-size: 40px; /* Ukuran panah, sesuaikan sesuai keinginan */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
-    background: transparent;
-    border: 1px solid #FFFFFF;
-    border-radius: 45px;
-    font-size: 22px;
+    cursor: pointer;
     transition: .5s;
+    line-height: 1;
 }
 
+/* Mengatur ikon panah dengan kode Unicode */
+.header-carousel .owl-nav .owl-prev::before {
+    content: "\2039"; /* Ikon panah kiri (‹) */
+}
+
+.header-carousel .owl-nav .owl-next::before {
+    content: "\203A"; /* Ikon panah kanan (›) */
+}
+
+/* Efek saat kursor di atas tombol */
 .header-carousel .owl-nav .owl-prev:hover,
 .header-carousel .owl-nav .owl-next:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+    color: var(--primary); /* Ganti warna saat hover */
 }
 
+
+
+/* KODE UNTUK DOTS (Sesuai dengan kode garis yang sebelumnya Anda minta) */
 .header-carousel .owl-dots {
     position: absolute;
-    height: 45px;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .header-carousel .owl-dot {
     position: relative;
     display: inline-block;
     margin: 0 5px;
-    width: 15px;
-    height: 15px;
-    background: transparent;
-    border: 1px solid #FFFFFF;
-    border-radius: 15px;
-    transition: .5s;
-}
-
-.header-carousel .owl-dot::after {
-    position: absolute;
-    content: "";
-    width: 5px;
-    height: 5px;
-    top: 4px;
-    left: 4px;
+    width: 30px;
+    height: 3px;
     background: #FFFFFF;
-    border-radius: 5px;
+    border: none;
+    border-radius: 0;
+    opacity: 0.5;
+    transition: all .5s;
 }
 
 .header-carousel .owl-dot.active {
-    background: var(--primary);
-    border-color: var(--primary);
+    opacity: 1;
+    background: var(--primary); /* Atau warna hijau yang Anda inginkan */
 }
 
+.header-carousel .owl-dot::after {
+    display: none;
+}
+
+
 .page-header {
-    background: url(../img/header-page.jpg) top center no-repeat;
+    position: relative; /* Sangat penting: agar pseudo-element bisa diposisikan */
+    background: url(../img/pkmbjw6.png) top center no-repeat;
     background-size: cover;
     text-shadow: 0 0 30px rgba(0, 0, 0, .1);
+    overflow: hidden; /* Tambahkan ini jika ada masalah tata letak */
 }
+
+/* Tambahkan overlay untuk meningkatkan kontras teks */
+.page-header::before {
+    content: ""; /* Wajib untuk pseudo-element */
+    position: absolute; /* Posisikan relatif terhadap .page-header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Warna hitam transparan (0.5 = 50% opasitas) */
+    /* Anda bisa ganti 'rgba(0, 0, 0, 0.5)' dengan warna lain, misal 'rgba(0, 100, 0, 0.4)' untuk hijau gelap */
+    z-index: 1; /* Pastikan overlay berada di bawah teks tapi di atas gambar */
+}
+
+/* Pastikan teks dan elemen penting lainnya berada di atas overlay */
+/* Tambahkan ini ke aturan CSS untuk h1, nav, atau div container di dalam .page-header */
+.page-header h1, 
+.page-header nav, 
+.page-header .container { /* Sesuaikan selektor ini dengan elemen teks Anda */
+    position: relative; /* Penting agar z-index bekerja */
+    z-index: 2; /* Pastikan teks berada di atas overlay */
+}
+
 
 .breadcrumb-item + .breadcrumb-item::before {
     color: var(--light);
@@ -516,4 +704,574 @@
 
 .footer .copyright a:hover {
     color: var(--primary);
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    margin-left: 40px;
+  }
+}
+
+/* Tambahkan di <style> di layouts Anda atau home/css/style.css */
+@media (max-width: 991.98px) { /* Untuk ukuran layar tablet ke bawah */
+    .logout-dropdown-menu {
+        min-width: unset; /* Hapus min-width default Bootstrap jika ada */
+        width: 150px !important; /* Contoh lebar spesifik untuk mobile */
+        /* Atau gunakan max-content agar lebarnya pas sesuai isi terpanjang */
+        /* width: max-content !important; */
+        /* Anda juga bisa menyesuaikan posisi jika perlu */
+        left: 0 !important; /* Biarkan rata kiri */
+    }
+    .logout-dropdown-item {
+        font-size: 0.9rem !important; /* Ukuran font lebih kecil */
+        padding: 0.5rem 1rem !important; /* Kurangi padding */
+        text-align: center; /* Opsional: pusatkan teks */
+    }
+}
+
+/* Untuk ukuran layar tablet kecil dan ponsel (lebar maksimum 767.98px) */
+@media (max-width: 767.98px) {
+    .display-4 {
+        font-size: 2.2rem !important; /* Mengurangi ukuran font untuk HP */
+        line-height: 1.2 !important; /* Menyesuaikan jarak antar baris agar lebih rapat */
+    }
+}
+
+/* Opsional: Jika masih terlalu besar di ponsel yang sangat kecil (lebar maksimum 575.98px) */
+@media (max-width: 575.98px) {
+    .display-4 {
+        font-size: 1.4rem !important; /* Ukuran font lebih kecil lagi */
+        line-height: 1.2 !important;
+    }
+}
+
+/* Untuk teks di bawah angka pengunjung */
+@media (max-width: 767.98px) {
+    .responsive-counter-text {
+        font-size: 0.85rem !important; /* Ukuran font lebih kecil untuk HP */
+        line-height: 1.2 !important; /* Pastikan teks tidak terlalu jauh jaraknya */
+    }
+}
+
+/* Opsional: Menyesuaikan padding di sekitar border start untuk HP agar tidak terlalu sempit */
+@media (max-width: 575.98px) {
+    .border-start.ps-3 {
+        padding-left: 0.75rem !important; /* Mengurangi padding kiri untuk HP */
+    }
+}
+
+/* Untuk ukuran layar tablet kecil dan ponsel */
+@media (max-width: 767.98px) {
+    .text-check-responsive {
+        font-size: 0.95rem !important; /* Sedikit kecilkan ukuran font */
+        line-height: 1.4 !important; /* Sesuaikan jarak antar baris */
+    }
+    /* Opsional: Jika ikon juga terasa besar */
+    .text-check-responsive .fa-check-circle {
+        font-size: 1.1rem !important; /* Kecilkan ukuran ikon */
+    }
+}
+
+/* Untuk ukuran layar ponsel (lebar maksimum 767.98px) */
+@media (max-width: 767.98px) {
+    .btn-readmore-responsive {
+        /* Coba kurangi padding lebih jauh */
+        padding: 0.6rem 1.2rem !important; /* Nilai yang lebih kecil dari sebelumnya */
+        
+        /* Coba kurangi font-size lebih jauh */
+        font-size: 0.8rem !important; /* Nilai yang lebih kecil dari sebelumnya */
+        
+        /* Opsional: Sesuaikan border-radius jika ingin lebih tidak membulat */
+        /* border-radius: 0.5rem !important; */ 
+    }
+
+    /* Jika tombol masih terasa terlalu lebar, Anda juga bisa membatasi lebarnya */
+    /* .btn-readmore-responsive {
+        max-width: 150px; 
+        width: 100%; 
+        box-sizing: border-box; 
+    } */
+}
+
+/* Jika Anda ingin sedikit perbedaan di layar sangat kecil (misal: di bawah 400px) */
+@media (max-width: 399.98px) {
+    .btn-readmore-responsive {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+/* Untuk ukuran layar ponsel (lebar maksimum 767.98px) */
+@media (max-width: 767.98px) {
+    .icon-circle-responsive {
+        width: 40px !important;  /* Mengurangi lebar lingkaran ikon */
+        height: 40px !important; /* Mengurangi tinggi lingkaran ikon */
+    }
+    .icon-responsive {
+        font-size: 1.2rem !important; /* Mengurangi ukuran ikon Font Awesome */
+    }
+}
+/* Opsional: Untuk layar yang lebih kecil lagi (misal: di bawah 450px) */
+@media (max-width: 450px) {
+    .icon-circle-responsive {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    .icon-responsive {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .feature-small-text {
+        font-size: 0.85rem !important; /* Ukuran font lebih kecil untuk teks deskripsi */
+        margin-bottom: 0.1rem !important; /* Kurangi sedikit margin bawah jika perlu */
+    }
+    .feature-title-text {
+        font-size: 0.95rem !important; /* Ukuran font lebih kecil untuk judul */
+    }
+    .ms-4 { /* Menyesuaikan margin kiri untuk kolom teks */
+        margin-left: 0.75rem !important; /* Mengurangi ms-4 menjadi ms-3 (atau custom) di HP */
+    }
+}
+
+/* ========================================= */
+/* --- RESPONSIVE ADJUSTMENTS FOR MOBILE --- */
+/* ========================================= */
+
+
+
+@media (max-width: 767.98px) { /* Untuk ukuran layar ponsel (Standard phones) */
+
+    /* Mengurangi margin vertikal section Feature di ponsel */
+    .container-fluid.bg-primary.overflow-hidden.my-5 {
+        margin-top: 1.5rem !important; /* Lebih kecil lagi di mobile */
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Mengurangi padding kolom teks di ponsel */
+    .col-lg-6.feature-text { /* Kolom utama teks "Mengapa Memilih Kami?" */
+        padding-top: 1.5rem !important; /* Kurangi padding vertikal kolom */
+        padding-bottom: 1.5rem !important;
+    }
+    .col-lg-6.feature-text > div.p-lg-5 { /* Div konten utama di dalam kolom teks */
+        padding: 1.5rem !important; /* Padding merata 1.5rem di mobile */
+        padding-left: 1.5rem !important; /* Memastikan ps-lg-0 tidak menimpa di sini */
+    }
+
+    /* Penyesuaian gambar di kolom kanan untuk ponsel */
+    .col-lg-6.pe-lg-0 { /* Kolom gambar */
+        min-height: 250px !important; /* Mengurangi tinggi gambar di ponsel */
+        /* Opsional: Sembunyikan gambar sepenuhnya di layar sangat kecil jika tidak penting */
+        /* display: none !important; */
+    }
+
+    /* Label "Fitur Unggulan" (border dan font) */
+    .feature-label-responsive {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Icon + Teks "Berpengalaman Dokter" (dan lainnya) */
+    .icon-circle-responsive { /* Lingkaran pembungkus ikon */
+        width: 40px !important;
+        height: 40px !important;
+    }
+    .icon-responsive { /* Ikon itu sendiri */
+        font-size: 1.2rem !important;
+    }
+    .feature-small-text { /* Teks "Berpengalaman", "Berkualitas", dst. */
+        font-size: 0.85rem !important;
+        margin-bottom: 0.1rem !important;
+    }
+    .feature-title-text { /* Teks "Dokter", "Pelayanan", dst. */
+        font-size: 0.95rem !important;
+    }
+    .ms-4 { /* Jarak antara lingkaran ikon dan teks */
+        margin-left: 0.75rem !important;
+    }
+
+    /* Padding untuk Kolom Fitur (Berpengalaman Dokter, dll.) */
+    .feature-item-col {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Mengatur item kolom "Berkualitas" dan "24 Jam" agar agak ke kanan di HP */
+    .ms-auto-sm {
+        margin-left: auto !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* Optional: Penyesuaian lebih lanjut untuk ponsel yang sangat kecil (Lebar max 450px) */
+@media (max-width: 450px) {
+    /* Mengurangi padding kolom teks di ponsel sangat kecil */
+    .col-lg-6.feature-text {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    .col-lg-6.feature-text > div.p-lg-5 {
+        padding: 1rem !important;
+        padding-left: 1rem !important;
+    }
+
+    /* Ikon dan teks lebih kecil di ponsel sangat kecil */
+    .icon-circle-responsive {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    .icon-responsive {
+        font-size: 1rem !important;
+    }
+    .feature-small-text {
+        font-size: 0.8rem !important;
+    }
+    .feature-title-text {
+        font-size: 0.9rem !important;
+    }
+    .ms-4 {
+        margin-left: 0.5rem !important;
+    }
+    .feature-item-col {
+        padding-left: 0.25rem !important;
+        padding-right: 0.25rem !important;
+    }
+
+    /* Tinggi gambar di ponsel sangat kecil */
+    .col-lg-6.pe-lg-0 {
+        min-height: 200px !important;
+    }
+}
+
+/* ========================================= */
+/* --- RESPONSIVE ADJUSTMENTS FOR TOPBAR --- */
+/* ========================================= */
+
+@media (max-width: 991.98px) { /* Untuk layar tablet dan ponsel */
+    .container-fluid.bg-light.p-0 {
+        padding-top: 0.5rem !important; /* Padding atas/bawah di tablet */
+        padding-bottom: 0.5rem !important;
+        height: auto !important; /* Pastikan tinggi disesuaikan otomatis */
+    }
+
+    /* Mengatur kolom pertama (alamat & jam buka) agar mengambil lebar penuh */
+    .row.gx-0 .col-lg-7 { /* Target spesifik kolom pertama */
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        text-align: center !important;
+    }
+
+    /* Sesuaikan ukuran font untuk informasi di Topbar */
+    .container-fluid.bg-light small {
+        font-size: 0.8rem !important;
+    }
+
+    /* Di tablet, bisa jadi inline-block agar berdampingan jika cukup */
+    .container-fluid.bg-light .h-100.d-inline-flex {
+        display: inline-block !important; /* Keep as inline-block for tablets if horizontal space allows */
+        margin: 0 0.5rem !important; /* Margin horizontal sedikit */
+        vertical-align: top; /* Prevent misalignment if text wraps */
+    }
+}
+
+@media (max-width: 767.98px) { /* Khusus untuk layar ponsel (di bawah tablet) */
+    .container-fluid.bg-light.p-0 {
+        padding-top: 0.2rem !important; /* Kurangi padding atas/bawah sangat kecil di ponsel */
+        padding-bottom: 0.2rem !important;
+    }
+
+    /* Atur jarak agar alamat dan jam buka menumpuk lebih rapi di ponsel */
+    .container-fluid.bg-light .h-100.d-inline-flex {
+        display: block !important; /* Pastikan menumpuk secara vertikal di ponsel */
+        margin: 0.05rem 0 !important; /* Kurangi margin vertikal antar item hingga sangat rapat */
+        padding: 0 !important; /* Hapus padding internal pada item itu sendiri */
+        line-height: 1.2; /* Menyesuaikan jarak baris teks */
+    }
+
+    /* Kurangi font-size sedikit lagi jika perlu */
+    .container-fluid.bg-light small {
+        font-size: 0.7rem !important; /* Font size lebih kecil untuk ponsel */
+    }
+}
+
+
+/* Pastikan transisi Owl Carousel terlihat */
+.owl-carousel .owl-stage {
+    transition-duration: 0.5s !important; /* Contoh: 0.5 detik */
+    -webkit-transition-duration: 0.5s !important;
+}
+
+/* Pastikan owl-item tidak disembunyikan oleh CSS lain */
+.owl-carousel .owl-item {
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important; /* Pastikan tidak terpengaruh oleh absolute/fixed dari luar */
+    display: block !important; /* Pastikan selalu block */
+}
+
+/* Custom CSS for Puskesmas Logo Text */
+.puskesmas-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3; /* <--- PENTING: Tingkatkan line-height di sini */
+}
+
+.puskesmas-logo-text .puskesmas-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-bottom: 0.2em; /* <--- Opsional: Sedikit tambah margin bawah */
+}
+
+.puskesmas-logo-text .puskesmas-location {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+    line-height: 1.2; /* Opsional: sedikit sesuaikan line-height untuk baris lokasi */
+}
+
+/* Styling untuk gambar ikon logo */
+.puskesmas-logo-icon {
+    width: 45px; /* Sesuaikan lebar gambar logo sesuai kebutuhan Anda */
+    height: auto; /* Biarkan tinggi menyesuaikan aspek rasio gambar */
+}
+
+/* Penyesuaian Responsif untuk Logo (Opsional) */
+@media (max-width: 575.98px) {
+    .puskesmas-logo-text {
+        line-height: 1.2; /* Sesuaikan line-height di mobile juga */
+    }
+    .puskesmas-logo-text .puskesmas-name {
+        font-size: 1rem;
+        margin-bottom: 0.1em;
+    }
+    .puskesmas-logo-text .puskesmas-location {
+        font-size: 0.7rem;
+    }
+    .puskesmas-logo-icon {
+        width: 35px; /* Sesuaikan ukuran gambar logo di layar kecil */
+    }
+}
+
+/* Styling untuk gambar ikon logo */
+.puskesmas-logo-icon {
+    width: 200px; /* Sesuaikan lebar gambar logo sesuai kebutuhan Anda */
+    height: auto; /* Biarkan tinggi menyesuaikan aspek rasio gambar */
+}
+
+/* Penyesuaian Responsif untuk Logo (Opsional) */
+@media (max-width: 575.98px) {
+    .puskesmas-logo-icon {
+        width: 170px; /* Sesuaikan ukuran gambar logo di layar kecil */
+    }
+}
+
+
+/* Untuk link profil dropdown (Hi, Nama) agar kursor pointer */
+.navbar-nav .nav-item.dropdown .nav-link.dropdown-toggle {
+    cursor: pointer !important;
+}
+
+
+/* --- CSS untuk NAVBAR TOGGLER (Ukuran dan Animasi X) --- */
+
+/* Ukuran keseluruhan tombol toggler */
+.navbar-toggler {
+    padding: .25rem; /* Sedikit kurangi padding default */
+    border: none; /* Hilangkan border default */
+    outline: none !important; /* Hilangkan outline saat fokus */
+    box-shadow: none !important; /* Hilangkan shadow saat fokus */
+}
+
+/* Kontainer garis-garis hamburger */
+.navbar-toggler-lines {
+    display: inline-block;
+    position: relative;
+    width: 28px; /* Lebar icon hamburger (bisa disesuaikan) */
+    height: 28px; /* Tinggi icon hamburger (bisa disesuaikan) */
+    vertical-align: middle;
+}
+
+/* Garis-garis hamburger */
+.navbar-toggler-lines span {
+    display: block;
+    position: absolute;
+    height: 3px; /* Ketebalan garis */
+    width: 100%;
+    background: var(--bs-dark); /* Warna garis (sesuaikan dengan warna teks navbar Anda) */
+    border-radius: 9999px; /* Membuat ujung garis bulat */
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .1s ease-in-out; /* Transisi untuk animasi */
+}
+
+/* Posisi awal garis */
+.navbar-toggler-lines .line-top { top: 0px; }
+.navbar-toggler-lines .line-middle { top: 8px; } /* Sesuaikan agar di tengah */
+.navbar-toggler-lines .line-bottom { top: 17px; } /* Sesuaikan agar di bawah */
+
+/* === Animasi ke X saat menu terbuka (navbar-toggler TIDAK memiliki class .collapsed) === */
+.navbar-toggler:not(.collapsed) .navbar-toggler-lines .line-top {
+    top: 8px; /* Geser garis atas ke tengah */
+    transform: rotate(45deg); /* Putar 45 derajat */
+}
+.navbar-toggler:not(.collapsed) .navbar-toggler-lines .line-middle {
+    opacity: 0; /* Sembunyikan garis tengah */
+    left: -28px; /* Geser ke kiri agar hilang sempurna */
+}
+.navbar-toggler:not(.collapsed) .navbar-toggler-lines .line-bottom {
+    top: 8px; /* Geser garis bawah ke tengah */
+    transform: rotate(-45deg); /* Putar -45 derajat */
+}
+
+
+/* Garis bawah untuk profil di menu mobile */
+.mobile-profile-divider {
+    border-bottom: 2px solid #dee2e6; /* Warna border bisa disesuaikan */
+    padding-bottom: 8px; /* Jarak antara teks dan garis */
+    margin-bottom: 8px; /* Jarak antara garis dan item menu berikutnya */
+    display: block; /* Penting agar border mengambil lebar penuh */
+}
+
+
+/* Untuk memposisikan breadcrumb ke ujung atas kiri */
+.custom-breadcrumb-position {
+    position: absolute !important; /* TAMBAHKAN !important */
+    top: 20px !important; /* TAMBAHKAN !important */
+    left: 42% !important; /* TAMBAHKAN !important */
+    z-index: 1000 !important; /* TAMBAHKAN !important */
+}
+
+/* Penyesuaian untuk mobile (jika ingin jarak yang berbeda) */
+@media (max-width: 767.98px) {
+    .custom-breadcrumb-position {
+        top: -40px !important; /* TAMBAHKAN !important */
+        left: -5px !important; /* TAMBAHKAN !important */
+    }
+}
+
+
+
+/* CSS untuk menyamakan ukuran font tombol pendaftaran/daftar sekarang di navbar */
+.navbar-collapse .btn.rounded-0 {
+    font-size: 1rem; /* Menyamakan font-size dengan nav-link default Bootstrap */
+    /* Jika font-size nav-link Anda berbeda (misal di custom CSS), gunakan nilai itu di sini */
+}
+
+/* Menyesuaikan padding/tinggi tombol desktop agar lebih proporsional */
+.navbar-collapse .btn.rounded-0.py-4.px-lg-4 {
+    padding-top: 24px !important; /* Mengurangi tinggi tombol dari default py-4 */
+    padding-bottom: 15px !important;
+}
+
+/* Menyesuaikan padding/tinggi tombol mobile agar lebih proporsional */
+.navbar-collapse .btn.rounded-0.d-block.d-lg-none {
+    height: auto !important; /* Biarkan tinggi menyesuaikan padding */
+    padding-top: 10px !important; /* Mengurangi tinggi tombol mobile */
+    padding-bottom: 10px !important;
+}
+
+/* CSS untuk menampilkan angka pada daftar bernomor */
+.numbered-list {
+    list-style-type: decimal; /* Memastikan angka ditampilkan */
+    padding-left: 20px; /* Memberi jarak dari tepi kiri agar angka terlihat */
+}
+
+.numbered-list li {
+    margin-bottom: 8px; /* Jarak antar item daftar */
+}
+
+
+
+
+/* ====================================================================================
+   Perbaikan untuk Menyamakan Tinggi Card
+==================================================================================== */
+
+/* Mengatur kontainer Flexbox untuk baris card */
+.row.g-4 {
+    display: flex;
+    flex-wrap: wrap; /* Memungkinkan card untuk pindah ke baris baru jika tidak muat */
+    align-items: stretch; /* PENTING: Membuat semua item memiliki tinggi yang sama */
+}
+
+/* Mengatur card di dalamnya */
+.card.border-0.rounded.shadow.p-0 {
+    display: flex;
+    flex-direction: column; /* Mengatur tata letak vertikal */
+    height: 100%; /* Membuat card mengisi tinggi yang tersedia dari kontainer flexbox */
+}
+
+/* Mengatur konten di dalam card */
+.card-body.p-4 {
+    flex-grow: 1; /* PENTING: Membuat card body mengisi sisa ruang yang tersedia, sehingga 'Baca Selengkapnya' berada di bawah */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Memastikan tombol 'Baca Selengkapnya' berada di bawah */
+.card-body.p-4 a.text-primary {
+    margin-top: auto; /* Mendorong elemen ini ke bagian bawah card body */
+}
+
+/* Opsi lain: mengatur tinggi judul dan deskripsi agar tidak terlalu panjang */
+/* Jika Anda ingin membatasi jumlah baris judul, Anda bisa menggunakan `line-clamp` */
+.card-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Batasi judul hanya 2 baris */
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+}
+
+.card-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Batasi ringkasan hanya 3 baris */
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+}
+
+
+
+.chatbot-body {
+    background-image: url('../img/pkmbjw-4.jpeg'); /* Ganti path sesuai lokasi gambar Anda */
+    background-size: cover; /* Untuk memastikan gambar menutupi seluruh area */
+    background-position: center; /* Untuk menempatkan gambar di tengah */
+    background-repeat: no-repeat; /* Untuk mencegah gambar berulang */
+}
+
+
+/* Sesuaikan jarak dari atas layar saat menggulir ke jangkar */
+#visimisi, #fitur_unggulan{
+    scroll-margin-top: 15vh; /* Atur jaraknya di sini, misalnya 100px */
+}
+
+#galeri{
+    scroll-margin-top: 20vh;
+}
+
+#alur_pendaftaran{
+    scroll-margin-top: 50vh;
+}
+
+#jenis_layanan{
+    scroll-margin-top: 15vh;
+}
+
+#prosedur_pelayanan{
+    scroll-margin-top: 15vh;
+}
+
+#biaya_pelayanan {
+    scroll-margin-top: 15vh; /* Atur jaraknya di sini, misalnya 100px */
 }
