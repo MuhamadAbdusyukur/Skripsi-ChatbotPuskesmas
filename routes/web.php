@@ -197,7 +197,7 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         }
 
         if ($foundQnaEntry && !$isTypoCorrection) {
-            $response = $foundQnaEntry->reply;
+            $response = (string) $foundQnaEntry->reply;
         } elseif ($foundQnaEntry && $isTypoCorrection) {
             $botman->startConversation(new TypoConfirmationConversation($foundQnaEntry->keyword, $foundQnaEntry->reply));
             $response = "Apakah yang Anda maksud adalah '" . $foundQnaEntry->keyword . "'? (Ketik 'Ya' atau 'Tidak')";

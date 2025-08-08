@@ -1423,7 +1423,7 @@ function appendMessage(sender, content) {
         const textContent = document.createElement('div');
         textContent.classList.add('bot-text');
         
-        if (typeof content === 'object' && content.text && content.buttons) {
+if (content && typeof content === 'object' && 'text' in content && 'buttons' in content) {
             textContent.innerHTML = `<p>${content.text}</p>`;
             const buttonContainer = document.createElement('div');
             buttonContainer.classList.add('button-container');
@@ -1476,15 +1476,17 @@ function appendMessage(sender, content) {
                 body: JSON.stringify({ message: message })
             });
 
-            const data = await response.json();
-            
-            if (data.reply) {
-                appendMessage('bot', data.reply);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            appendMessage('bot', 'Maaf, terjadi kesalahan. Silakan coba lagi.');
-        }
+            const raw = await response.text();
+    console.log('RAW:', raw); // tambahkan ini
+
+    const data = JSON.parse(raw); // lalu parse manual
+    if (data.reply) {
+        appendMessage('bot', data.reply);
+    }
+} catch (error) {
+    console.error('Parsing error:', error);
+    appendMessage('bot', 'Maaf, terjadi kesalahan. Silakan coba lagi.');
+}
     }
 
     // Event listener untuk tombol bulat (toggle)
