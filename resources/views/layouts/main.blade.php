@@ -1408,26 +1408,27 @@ const sendBtn = document.getElementById('sendBtn');
 function appendMessage(sender, content) {
     const chatMessages = document.getElementById('chatMessages');
     const messageContainer = document.createElement('div');
-    
+
     if (sender === 'user') {
         messageContainer.classList.add('message-bubble', 'user-message');
-        messageContainer.innerHTML = content;
+        messageContainer.innerText = content; // user input plain text
     } else if (sender === 'bot') {
         messageContainer.classList.add('message-bubble', 'bot-message');
-        
-        // Tambahkan avatar untuk pesan bot
+
+        // Tambahkan avatar
         const avatar = document.createElement('img');
         avatar.classList.add('bot-avatar');
-        avatar.src = '/home/img/Logo Chatbot.svg'; // Path gambar Anda
-        
+        avatar.src = '/home/img/Logo Chatbot.svg';
+
         const textContent = document.createElement('div');
         textContent.classList.add('bot-text');
-        
-if (content && typeof content === 'object' && 'text' in content && 'buttons' in content) {
+
+        // ✅ Logika fix untuk konten tombol atau teks biasa
+        if (content && typeof content === 'object' && 'text' in content && 'buttons' in content) {
             textContent.innerHTML = `<p>${content.text}</p>`;
             const buttonContainer = document.createElement('div');
             buttonContainer.classList.add('button-container');
-            
+
             content.buttons.forEach(button => {
                 const buttonElement = document.createElement(button.url ? 'a' : 'button');
                 buttonElement.classList.add('chat-button');
@@ -1442,13 +1443,16 @@ if (content && typeof content === 'object' && 'text' in content && 'buttons' in 
                         sendMessage();
                     });
                 }
+
                 buttonContainer.appendChild(buttonElement);
             });
+
             textContent.appendChild(buttonContainer);
         } else {
+            // ✅ Aman untuk HTML dari database
             textContent.innerHTML = content;
         }
-        
+
         messageContainer.appendChild(avatar);
         messageContainer.appendChild(textContent);
     }
@@ -1456,6 +1460,7 @@ if (content && typeof content === 'object' && 'text' in content && 'buttons' in 
     chatMessages.appendChild(messageContainer);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
 
     // Fungsi untuk mengirim pesan ke BotMan backend
     async function sendMessage() {
@@ -1476,17 +1481,15 @@ if (content && typeof content === 'object' && 'text' in content && 'buttons' in 
                 body: JSON.stringify({ message: message })
             });
 
-            const raw = await response.text();
-    console.log('RAW:', raw); // tambahkan ini
-
-    const data = JSON.parse(raw); // lalu parse manual
-    if (data.reply) {
-        appendMessage('bot', data.reply);
-    }
-} catch (error) {
-    console.error('Parsing error:', error);
-    appendMessage('bot', 'Maaf, terjadi kesalahan. Silakan coba lagi.');
-}
+            const data = await response.json();
+            
+            if (data.reply) {
+                appendMessage('bot', data.reply);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            appendMessage('bot', 'Maaf, terjadi kesalahan. Silakan coba lagi.');
+        }
     }
 
     // Event listener untuk tombol bulat (toggle)

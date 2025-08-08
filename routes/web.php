@@ -172,10 +172,12 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
     if (in_array($messageText, ['mulai', 'halo', 'hallo', 'hi', 'bantuan'])) {
         $conversationInstance = new GeneralQuestionsConversation();
         $questionObject = $conversationInstance->askGeneralQuestions(true);
+        
         $response = [
             'text' => $questionObject->getText(),
             'buttons' => $questionObject->getButtons()
         ];
+        
         $botman->startConversation($conversationInstance);
     }
     
@@ -187,17 +189,14 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         $foundQnaEntry = null;
         $isTypoCorrection = false;
         
-        // --- PERBAIKAN PENTING DI SINI ---
-        // Menggunakan whereRaw dengan LOWER() untuk pencarian case-insensitive yang lebih fleksibel
-        $        $responseQna = Qna::whereRaw('LOWER(keyword) LIKE ?', ["%" . $messageText . "%"])->first();
+        $responseQna = Qna::where('keyword', 'LIKE', '%' . $messageText . '%')->first();
 
-        
         if ($responseQna) {
             $foundQnaEntry = $responseQna;
         }
 
         if ($foundQnaEntry && !$isTypoCorrection) {
-            $response = (string) $foundQnaEntry->reply;
+            $response = $foundQnaEntry->reply;
         } elseif ($foundQnaEntry && $isTypoCorrection) {
             $botman->startConversation(new TypoConfirmationConversation($foundQnaEntry->keyword, $foundQnaEntry->reply));
             $response = "Apakah yang Anda maksud adalah '" . $foundQnaEntry->keyword . "'? (Ketik 'Ya' atau 'Tidak')";
@@ -207,6 +206,7 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
                     Button::create('Bantuan')->value('mulai'),
                     Button::create('Hubungi Staf')->url('https://wa.me/6281320296731?text=Halo%20Admin.')->additionalParameters(['target' => '_blank']),
                 ]);
+            
             $response = [
                 'text' => $question->getText(),
                 'buttons' => $question->getButtons()
@@ -214,9 +214,8 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         }
     }
     
-    return response()->json([
-        'reply' => is_array($response) ? $response : (string) $response
-]);
+    return response()->json(['reply' => $response]);
+
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 
