@@ -15,17 +15,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+            $this->call(UserSeeder::class); // Ganti UsersTableSeeder dengan UserSeeder
+
         $user = [
             [
-                'name' => 'Admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('password')
+                'name' => 'Kepala Puskesmas',
+                'email' => 'kapus@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => 'super_admin' 
             ],
-            [
-                'name' => 'Admin Dua',
-                'email' => 'admin2@gmail.com',
-                'password' => Hash::make('123456')
-            ]
         ];
 
         User::insert($user);
