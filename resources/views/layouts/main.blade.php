@@ -1408,27 +1408,26 @@ const sendBtn = document.getElementById('sendBtn');
 function appendMessage(sender, content) {
     const chatMessages = document.getElementById('chatMessages');
     const messageContainer = document.createElement('div');
-
+    
     if (sender === 'user') {
         messageContainer.classList.add('message-bubble', 'user-message');
-        messageContainer.innerText = content; // user input plain text
+        messageContainer.innerHTML = content;
     } else if (sender === 'bot') {
         messageContainer.classList.add('message-bubble', 'bot-message');
-
-        // Tambahkan avatar
+        
+        // Tambahkan avatar untuk pesan bot
         const avatar = document.createElement('img');
         avatar.classList.add('bot-avatar');
-        avatar.src = '/home/img/Logo Chatbot.svg';
-
+        avatar.src = '/home/img/Logo Chatbot.svg'; // Path gambar Anda
+        
         const textContent = document.createElement('div');
         textContent.classList.add('bot-text');
-
-        // ✅ Logika fix untuk konten tombol atau teks biasa
-        if (content && typeof content === 'object' && 'text' in content && 'buttons' in content) {
+        
+        if (typeof content === 'object' && content.text && content.buttons) {
             textContent.innerHTML = `<p>${content.text}</p>`;
             const buttonContainer = document.createElement('div');
             buttonContainer.classList.add('button-container');
-
+            
             content.buttons.forEach(button => {
                 const buttonElement = document.createElement(button.url ? 'a' : 'button');
                 buttonElement.classList.add('chat-button');
@@ -1443,16 +1442,13 @@ function appendMessage(sender, content) {
                         sendMessage();
                     });
                 }
-
                 buttonContainer.appendChild(buttonElement);
             });
-
             textContent.appendChild(buttonContainer);
         } else {
-            // ✅ Aman untuk HTML dari database
             textContent.innerHTML = content;
         }
-
+        
         messageContainer.appendChild(avatar);
         messageContainer.appendChild(textContent);
     }
@@ -1460,7 +1456,6 @@ function appendMessage(sender, content) {
     chatMessages.appendChild(messageContainer);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
-
 
     // Fungsi untuk mengirim pesan ke BotMan backend
     async function sendMessage() {
@@ -1471,7 +1466,7 @@ function appendMessage(sender, content) {
         userInput.value = '';
 
         try {
-            const response = await fetch('/botman', {
+            const response = await fetch('https://puskesmasbanjarwangi.site/botman', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
