@@ -189,10 +189,8 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         
         // --- PERBAIKAN PENTING DI SINI ---
         // Menggunakan whereRaw dengan LOWER() untuk pencarian case-insensitive yang lebih fleksibel
-        $responseQna = Qna::whereRaw('LOWER(keyword) LIKE ?', ["%" . $messageText . "%"])
-                          ->orWhereRaw('LOWER(keyword) LIKE ?', ["%" . $messageText])
-                          ->orWhereRaw('LOWER(keyword) = ?', [$messageText])
-                          ->first();
+        $        $responseQna = Qna::whereRaw('LOWER(keyword) LIKE ?', ["%" . $messageText . "%"])->first();
+
         
         if ($responseQna) {
             $foundQnaEntry = $responseQna;

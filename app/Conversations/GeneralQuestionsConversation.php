@@ -8,6 +8,7 @@ use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use App\Models\Qna;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB; // Tambahkan ini
 
 class GeneralQuestionsConversation extends Conversation
 {
@@ -21,13 +22,11 @@ class GeneralQuestionsConversation extends Conversation
         $this->start();
     }
 
-    // Tambahkan parameter $returnQuestion
     public function askGeneralQuestions($returnQuestion = false)
     {
-    $popularKeywords = Qna::where('is_popular', true)->limit(3)->pluck('keyword')->toArray();
+        $popularKeywords = Qna::where('is_popular', true)->limit(3)->pluck('keyword')->toArray();
 
         if (empty($popularKeywords)) {
-            // Jika tidak ada keyword, kembalikan Question sederhana atau pesan
             $question = Question::create("Halo! Ada yang bisa saya bantu? Silakan ketik pertanyaan Anda.");
             if ($returnQuestion) {
                 return $question;
@@ -47,13 +46,16 @@ class GeneralQuestionsConversation extends Conversation
             ->addButtons($buttons);
 
         if ($returnQuestion) {
-            return $question; // Mengembalikan objek Question
+            return $question;
         }
 
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                $selectedKeyword = $answer->getValue();
-                $qnaEntry = Qna::where('keyword', $selectedKeyword)->first();
+                $selectedKeyword = strtolower($answer->getValue()); // Tangkap nilai tombol, ubah ke huruf kecil
+
+                // --- PERBAIKAN DI SINI ---
+                // Cari jawaban di database berdasarkan keyword dari tombol
+                $qnaEntry = Qna::whereRaw('LOWER(keyword) = ?', [$selectedKeyword])->first();
 
                 if ($qnaEntry) {
                     $reply = str_replace(['<p>', '</p>'], '', $qnaEntry->reply);
