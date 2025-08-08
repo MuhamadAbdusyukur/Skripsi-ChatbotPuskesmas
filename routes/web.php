@@ -162,66 +162,65 @@ Route::get('/gallery', [PengunjungController::class, 'gallery'])->name('pengunju
 // ROUTE UTAMA UNTUK BOTMAN
 // ROUTE UTAMA UNTUK BOTMAN
 // ROUTE UTAMA UNTUK BOTMAN
-
 Route::match(['get', 'post'], '/botman', function (Request $request) {
-Log::info('--- BotMan Request Received ---');
-$botman = app('botman');
-$messageText = strtolower(trim($request->input('message')));
+    Log::info('--- BotMan Request Received ---');
+    $botman = app('botman');
+    $messageText = strtolower(trim($request->input('message')));
 
+    $response = null;
 
-$response = null;
+    if (in_array($messageText, ['mulai', 'halo', 'hallo', 'hi', 'bantuan'])) {
+        $conversationInstance = new GeneralQuestionsConversation();
+        $questionObject = $conversationInstance->askGeneralQuestions(true);
+        
+        $response = [
+            'text' => $questionObject->getText(),
+            'buttons' => $questionObject->getButtons()
+        ];
+        
+        $botman->startConversation($conversationInstance);
+    }
+    
+    elseif ($messageText === 'kirim_link_staff') {
+        $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/6281320296731';
+    }
 
+    else {
+        $foundQnaEntry = null;
+        $isTypoCorrection = false;
+        
+        $responseQna = Qna::where('keyword', 'LIKE', '%' . $messageText . '%')->first();
 
-if (in_array($messageText, ['mulai', 'halo', 'hallo', 'hi', 'bantuan'])) {
-  $conversationInstance = new GeneralQuestionsConversation();
-  $questionObject = $conversationInstance->askGeneralQuestions(true);
- 
-  $response = [
-   'text' => $questionObject->getText(),
-   'buttons' => $questionObject->getButtons()
-  ];
- 
-  $botman->startConversation($conversationInstance);
-}
-elseif ($messageText === 'kirim_link_staff') {
-  $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/6281320296731';
-}
+        if ($responseQna) {
+            $foundQnaEntry = $responseQna;
+        }
 
-
-else {
-  $foundQnaEntry = null;
-  $isTypoCorrection = false;
- 
-  $responseQna = Qna::where('keyword', 'LIKE', '%' . $messageText . '%')->first();
-
-
-  if ($responseQna) {
-   $foundQnaEntry = $responseQna;
-  }
-
-
-  if ($foundQnaEntry && !$isTypoCorrection) {
-   $response = $foundQnaEntry->reply;
-  } elseif ($foundQnaEntry && $isTypoCorrection) {
-   $botman->startConversation(new TypoConfirmationConversation($foundQnaEntry->keyword, $foundQnaEntry->reply));
-   $response = "Apakah yang Anda maksud adalah '" . $foundQnaEntry->keyword . "'? (Ketik 'Ya' atau 'Tidak')";
-  } else {
-   $question = Question::create('Maaf, saya tidak mengerti. Mungkin Anda bisa mencoba beberapa opsi di bawah ini:')
-     ->addButtons([
-   Button::create('Bantuan')->value('mulai'),
-   Button::create('Hubungi Staf')->url('https://wa.me/6281320296731?text=Halo%20Admin.')->additionalParameters(['target' => '_blank']),
-     ]);
-     $response = [
-     'text' => $question->getText(),
-     'buttons' => $question->getButtons()
-   ];
-  }
-}
-return response()->json(['reply' => $response]);
-
-
+        if ($foundQnaEntry && !$isTypoCorrection) {
+            $response = $foundQnaEntry->reply;
+        } elseif ($foundQnaEntry && $isTypoCorrection) {
+            $botman->startConversation(new TypoConfirmationConversation($foundQnaEntry->keyword, $foundQnaEntry->reply));
+            $response = "Apakah yang Anda maksud adalah '" . $foundQnaEntry->keyword . "'? (Ketik 'Ya' atau 'Tidak')";
+        } else {
+            $question = Question::create('Maaf, saya tidak mengerti. Mungkin Anda bisa mencoba beberapa opsi di bawah ini:')
+                ->addButtons([
+                    Button::create('Bantuan')->value('mulai'),
+                    Button::create('Hubungi Staf')->url('https://wa.me/6281320296731?text=Halo%20Admin.')->additionalParameters(['target' => '_blank']),
+                ]);
+            
+            $response = [
+                'text' => $question->getText(),
+                'buttons' => $question->getButtons()
+            ];
+        }
+    }
+    
+    return response()->json(['reply' => $response]);
 
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+
+
+
 
 
 
