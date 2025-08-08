@@ -44,13 +44,16 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-    <label for="is_popular">Jadikan Pertanyaan Sering Diajukan</label>
-    <select class="form-control" id="is_popular" name="is_popular">
-        <option value="1" {{ $qna->is_popular == 1 ? 'selected' : '' }}>Ya</option>
-        <option value="0" {{ $qna->is_popular == 0 ? 'selected' : '' }}>Tidak</option>
-    </select>
-</div>
+                    <div class="form-group form-check">
+        {{-- Menggunakan kondisi untuk memeriksa apakah variabel $qna ada --}}
+        @php
+            $isPopular = isset($qna) ? $qna->is_popular : false;
+        @endphp
+
+        <input type="hidden" name="is_popular" value="0">
+        <input type="checkbox" class="form-check-input" id="is_popular" name="is_popular" value="1" {{ $isPopular ? 'checked' : '' }}>
+        <label class="form-check-label" for="is_popular">Jadikan Pertanyaan Sering Diajukan</label>
+    </div>
 
                     <div class="d-flex gap-2 justify-content-end mt-4"> {{-- Menggunakan d-flex dan gap untuk tombol --}}
                         <button type="submit" class="btn btn-primary">Simpan</button> {{-- Menggunakan btn-primary --}}
