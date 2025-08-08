@@ -185,48 +185,41 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/6281320296731';
     }
 
-    else {
-        $foundQnaEntry = null;
-        $isTypoCorrection = false;
+    // ...
+else { // Blok ini menangani jika pesan pengguna tidak cocok dengan 'mulai', 'halo', dll.
+    $foundQnaEntry = null;
+    $messageText = strtolower(trim($request->input('message')));
+
+    // Perbaiki logika pencarian agar lebih andal
+    $qnaEntries = Qna::all();
+    foreach ($qnaEntries as $entry) {
+        $keywords = array_map('trim', explode(',', strtolower($entry->keyword)));
+        if (in_array($messageText, $keywords)) {
+            $foundQnaEntry = $entry;
+            break;
+        }
+    }
+
+    if ($foundQnaEntry) {
+        $response = $foundQnaEntry->reply;
+    } else {
+        // Logika ini yang harus dieksekusi jika tidak ada data yang cocok
+        $question = Question::create('Maaf, saya tidak mengerti. Mungkin Anda bisa mencoba beberapa opsi di bawah ini:')
+            ->addButtons([
+                Button::create('Jadwal Dokter')->value('jadwal dokter'),
+                Button::create('Jam Buka')->value('jam buka'),
+                Button::create('Kontak Kami')->value('kontak'),
+            ]);
         
-$responseQna = Qna::whereRaw("LOWER(keyword) = ? OR LOWER(keyword) LIKE ?", [$messageText, "%$messageText,%"])->first();
-
-// Atau lebih baik lagi, lakukan pemisahan string di PHP
-$foundQnaEntry = null;
-$qnaEntries = Qna::all();
-
-foreach ($qnaEntries as $entry) {
-    $keywords = explode(', ', strtolower($entry->keyword));
-    if (in_array($messageText, $keywords)) {
-        $foundQnaEntry = $entry;
-        break;
+        $response = [
+            'text' => $question->getText(),
+            'buttons' => $question->getButtons()
+        ];
     }
 }
-
-        if ($responseQna) {
-            $foundQnaEntry = $responseQna;
-        }
-
-        if ($foundQnaEntry && !$isTypoCorrection) {
-            $response = $foundQnaEntry->reply;
-        } elseif ($foundQnaEntry && $isTypoCorrection) {
-            $botman->startConversation(new TypoConfirmationConversation($foundQnaEntry->keyword, $foundQnaEntry->reply));
-            $response = "Apakah yang Anda maksud adalah '" . $foundQnaEntry->keyword . "'? (Ketik 'Ya' atau 'Tidak')";
-        } else {
-            $question = Question::create('Maaf, saya tidak mengerti. Mungkin Anda bisa mencoba beberapa opsi di bawah ini:')
-                ->addButtons([
-                    Button::create('Bantuan')->value('mulai'),
-                    Button::create('Hubungi Staf')->url('https://wa.me/6281320296731?text=Halo%20Admin.')->additionalParameters(['target' => '_blank']),
-                ]);
-            
-            $response = [
-                'text' => $question->getText(),
-                'buttons' => $question->getButtons()
-            ];
-        }
-    }
     
-    return response()->json(['reply' => $response]);
+// Pastikan variabel $response selalu terdefinisi sebelum dikirim
+return response()->json(['reply' => $response]);
 
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
