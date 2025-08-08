@@ -214,7 +214,9 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         }
     }
     
-    return response()->json(['reply' => $response]);
+    return response()->json([
+        'reply' => is_array($response) ? $response : (string) $response
+]);
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 
