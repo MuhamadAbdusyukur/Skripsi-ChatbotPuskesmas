@@ -40,6 +40,7 @@ Route::get('/articles/{slug}', [PengunjungController::class, 'showArticle'])->na
 Route::get('/pendaftaran', [PengunjungController::class, 'create'])->name('pengunjung.create');
 Route::post('/pendaftaran', [PengunjungController::class, 'store'])->name('pengunjung.store');
 Route::post('/pengunjung/selesai', [PengunjungController::class, 'selesai'])->name('pengunjung.selesai');
+Route::get('/pendaftaran', [PengunjungController::class, 'selesai'])->name('pengunjung.pendaftaran');
 
 // AUTHENTIKASI PENGUNJUNG
 Route::get('/pengunjung/login', [LoginController::class, 'formPengunjungLogin'])->name('pengunjung.login.form');

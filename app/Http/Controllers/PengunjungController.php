@@ -149,26 +149,26 @@ class PengunjungController extends Controller
         return redirect()->route('pengunjung.pendaftaran')->with('success', 'Pendaftaran berhasil. Silakan tunggu informasi selanjutnya.');
     }
 
-    public function selesai(Request $request)
-    {
-        $nik = auth()->user()->nik;
-        $today = Carbon::today();
+    // public function selesai(Request $request)
+    // {
+    //     $nik = auth()->user()->nik;
+    //     $today = Carbon::today();
 
-        $pengunjung = Pengunjung::where('nik', $nik)
-            ->whereDate('tgl_kunjung', $today)
-            ->where('selesai', false)
-            ->latest()
-            ->first();
+    //     $pengunjung = Pengunjung::where('nik', $nik)
+    //         ->whereDate('tgl_kunjung', $today)
+    //         ->where('selesai', false)
+    //         ->latest()
+    //         ->first();
 
-        if ($pengunjung) {
-            $pengunjung->selesai = true;
-            $pengunjung->save();
-        }
+    //     if ($pengunjung) {
+    //         $pengunjung->selesai = true;
+    //         $pengunjung->save();
+    //     }
 
-        // session()->forget(['nomor_antrian', 'pendaftaran_time']);
+    //     // session()->forget(['nomor_antrian', 'pendaftaran_time']);
 
-        return redirect('/')->with('success', 'Terima kasih, Anda telah menyelesaikan kunjungan.');
-    }
+    //     return redirect('/')->with('success', 'Terima kasih, Anda telah menyelesaikan kunjungan.');
+    // }
 
     public function about()
     {
