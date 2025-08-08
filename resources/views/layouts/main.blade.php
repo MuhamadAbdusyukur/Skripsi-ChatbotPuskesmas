@@ -1466,7 +1466,7 @@ function appendMessage(sender, content) {
         userInput.value = '';
 
         try {
-            const response = await fetch('https://puskesmasbanjarwangi.site/botman', {
+            const response = await fetch('https://puskesmasbanjarwangi.site/public/botman', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
