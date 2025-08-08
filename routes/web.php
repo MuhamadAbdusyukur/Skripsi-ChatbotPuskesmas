@@ -220,12 +220,6 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
 
 
 
-
-
-
-
-
-
 // Route Controller QNA
 Route::resource('/qna', QnaController::class)->middleware('auth');
 
