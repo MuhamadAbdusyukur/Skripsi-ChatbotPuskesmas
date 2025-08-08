@@ -189,7 +189,7 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         $foundQnaEntry = null;
         $isTypoCorrection = false;
         
-        $responseQna = Qna::where('keyword', 'LIKE', '%' . $messageText . '%')->first();
+        $responseQna = Qna::whereRaw('LOWER(keyword) LIKE ?', ['%' . $messageText . '%'])->first();
 
         if ($responseQna) {
             $foundQnaEntry = $responseQna;
