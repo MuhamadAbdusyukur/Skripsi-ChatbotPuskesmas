@@ -189,7 +189,19 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         $foundQnaEntry = null;
         $isTypoCorrection = false;
         
-        $responseQna = Qna::whereRaw('LOWER(keyword) LIKE ?', ['%' . $messageText . '%'])->first();
+$responseQna = Qna::whereRaw("LOWER(keyword) = ? OR LOWER(keyword) LIKE ?", [$messageText, "%$messageText,%"])->first();
+
+// Atau lebih baik lagi, lakukan pemisahan string di PHP
+$foundQnaEntry = null;
+$qnaEntries = Qna::all();
+
+foreach ($qnaEntries as $entry) {
+    $keywords = explode(', ', strtolower($entry->keyword));
+    if (in_array($messageText, $keywords)) {
+        $foundQnaEntry = $entry;
+        break;
+    }
+}
 
         if ($responseQna) {
             $foundQnaEntry = $responseQna;
