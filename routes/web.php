@@ -189,7 +189,7 @@ $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/628132029
 else {
 $foundQnaEntry = null;
 $isTypoCorrection = false;
-$responseQna = Qna::where('keyword', 'LIKE', '%' . $messageText . '%')->first();
+        $responseQna = Qna::whereRaw('LOWER(keyword) LIKE ?', ["%" . $messageText . "%"])->first();
 
 
 if ($responseQna) {
