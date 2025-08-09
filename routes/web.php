@@ -21,6 +21,8 @@ use App\Conversations\GeneralQuestionsConversation; // Import conversation baru
 use App\Conversations\FallbackConversation; // Jangan lupa use ini
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage; // Tambahkan baris ini
 
 use BotMan\BotMan\Messages\Outgoing\Question;
@@ -54,15 +56,6 @@ Route::get('/', [PengunjungController::class, 'index']);
 //     Route::post('/pendaftaran', [PengunjungController::class, 'store'])->name('pengunjung.store');
 // });
 
-Route::get('/storage/{path}', function ($path) {
-    $file = storage_path('app/public/' . $path);
-
-    if (!file_exists($file)) {
-        abort(404);
-    }
-
-    return Response::file($file);
-})->where('path', '.*');
 
 
 Route::get('/pendaftaran', [PengunjungController::class, 'create'])->name('pengunjung.create');
@@ -253,3 +246,24 @@ Route::get('/chatbot-initial-options', [QnaController::class, 'getInitialChatOpt
 Route::get('/admin/laporan/pdf/tanggal/{tanggal}', [AdminController::class, 'downloadPdfTanggal'])->name('admin.laporan.pdf_tanggal');
 // Route PDF LAPORAN BERDASARKAN POLI
 Route::get('/admin/laporan/pdf/poli/{id}', [AdminController::class, 'downloadPdfPoli'])->name('admin.laporan.pdf_poli');
+
+
+
+Route::get('/storage/{folder}/{filename}', function ($folder, $filename) {
+    $path = "public/{$folder}/{$filename}";
+
+    if (!Storage::exists($path)) {
+        abort(404);
+    }
+
+    // Ambil file dari storage
+    $file = Storage::get($path);
+
+    // Tentukan tipe MIME (misalnya image/png, image/jpeg, dll.)
+    $mimeType = Storage::mimeType($path);
+
+    return Response::make($file, 200, [
+        'Content-Type' => $mimeType,
+        'Content-Disposition' => 'inline; filename="' . $filename . '"'
+    ]);
+});
