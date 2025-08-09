@@ -20,6 +20,7 @@ use App\Conversations\TypoConfirmationConversation; // <-- IMPORT INI
 use App\Conversations\GeneralQuestionsConversation; // Import conversation baru
 use App\Conversations\FallbackConversation; // Jangan lupa use ini
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage; // Tambahkan baris ini
 
 use BotMan\BotMan\Messages\Outgoing\Question;
@@ -52,6 +53,16 @@ Route::get('/', [PengunjungController::class, 'index']);
 //     Route::get('/pendaftaran', [PengunjungController::class, 'create'])->name('pengunjung.create');
 //     Route::post('/pendaftaran', [PengunjungController::class, 'store'])->name('pengunjung.store');
 // });
+
+Route::get('/storage/{path}', function ($path) {
+    $file = storage_path('app/public/' . $path);
+
+    if (!file_exists($file)) {
+        abort(404);
+    }
+
+    return Response::file($file);
+})->where('path', '.*');
 
 
 Route::get('/pendaftaran', [PengunjungController::class, 'create'])->name('pengunjung.create');
