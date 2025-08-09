@@ -44,7 +44,8 @@
                                 <td>{{ $article->title }}</td>
                                 <td class="text-center">
                                     @if($article->image && Storage::disk('public')->exists($article->image))
-                                        <img src="{{ asset('storage/articles' . $article->image) }}" alt="{{ $article->title }}" class="img-thumbnail rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                                    <img src="{{ url('storage/articles/' . $article->image) }}" alt="Gambar">
+                                    {{-- <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="img-thumbnail rounded" style="width: 80px; height: 80px; object-fit: cover;"> --}}
                                     @else
                                         <i class="fa-solid fa-image-slash fa-2x text-muted" title="Tidak ada gambar"></i><br> {{-- Ikon jika tidak ada gambar --}}
                                         <small class="text-muted">Tidak ada gambar</small>
