@@ -1402,6 +1402,27 @@ const sendBtn = document.getElementById('sendBtn');
     let isChatOpen = false;
     let hasIntroduced = false;
 
+    // --- Langkah Baru: Muat riwayat chat dari server ---
+    async function loadChatHistory() {
+        try {
+            const response = await fetch('/chatbot/history');
+            const history = await response.json();
+            
+            history.forEach(log => {
+                appendMessage(log.sender, log.message);
+            });
+            if (history.length > 0) {
+                hasIntroduced = true;
+            }
+        } catch (error) {
+            console.error('Failed to load chat history:', error);
+        }
+    }
+
+    // Panggil fungsi ini saat halaman dimuat
+    loadChatHistory();
+
+
     // Fungsi untuk menampilkan pesan ke layar
     // Ganti seluruh fungsi appendMessage Anda dengan ini
 // Ganti seluruh fungsi appendMessage Anda dengan ini

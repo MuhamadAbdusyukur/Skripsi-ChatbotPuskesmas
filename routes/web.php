@@ -18,6 +18,10 @@ use App\Http\Controllers\QnaController;
 use BotMan\BotMan\Messages\Conversations\Conversation; // Pastikan ini ada
 use App\Conversations\TypoConfirmationConversation; // <-- IMPORT INI
 use App\Conversations\GeneralQuestionsConversation; // Import conversation baru
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie; // Tambahkan ini
+
+
 use App\Conversations\FallbackConversation; // Jangan lupa use ini
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -171,7 +175,24 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
     $botman = app('botman');
     $messageText = strtolower(trim($request->input('message')));
 
+
+    // --- Langkah Baru: Ambil user_id dari cookie atau buat yang baru ---
+    $userId = Cookie::get('user_id');
+    if (!$userId) {
+        $userId = uniqid('user_');
+        Cookie::queue('user_id', $userId, 120); // Simpan ID di cookie selama 2 jam (120 menit)
+    }
+
+    // Ambil riwayat chat dari session
+    $chatHistory = Session::get("chat_history_{$userId}", []);
+
     $response = null;
+
+
+    // Simpan pesan pengguna ke session
+    if ($messageText) {
+        $chatHistory[] = ['sender' => 'user', 'message' => $messageText];
+    }
 
     if (in_array($messageText, ['mulai', 'halo', 'hallo', 'hi', 'bantuan'])) {
         $conversationInstance = new GeneralQuestionsConversation();
@@ -216,11 +237,29 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
                 'buttons' => $question->getButtons()
             ];
         }
+
+        // Simpan respons bot ke session
+    if ($response) {
+        $chatHistory[] = ['sender' => 'bot', 'message' => $response];
+    }
+    Session::put("chat_history_{$userId}", $chatHistory);
+
     }
     
     return response()->json(['reply' => $response]);
 
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+// --- Tambahkan rute baru untuk mendapatkan histori chat ---
+Route::get('/chatbot/history', function (Request $request) {
+    $userId = Cookie::get('user_id');
+    if (!$userId) {
+        return [];
+    }
+    return Session::get("chat_history_{$userId}", []);
+});
+
+
 
 
 
