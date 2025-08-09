@@ -22,7 +22,7 @@
             <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
     <div class="gallery-item position-relative rounded overflow-hidden">
         @if($image->file_path && Storage::disk('public')->exists($image->file_path))
-            <img class="img-fluid w-100" src="{{ Storage::url($image->file_path) }}" alt="{{ $image->description ?? 'Gambar Galeri' }}" style="height: 250px; object-fit: cover;">
+            <img class="img-fluid w-100" src="{{ asset('storage/' . $image->file_path) }}" alt="{{ $image->description ?? 'Gambar Galeri' }}" style="height: 250px; object-fit: cover;">
         @else
             <img class="img-fluid w-100" src="https://placehold.co/400x250?text=No+Image" alt="Gambar Tidak Tersedia" style="height: 250px; object-fit: cover;">
         @endif
