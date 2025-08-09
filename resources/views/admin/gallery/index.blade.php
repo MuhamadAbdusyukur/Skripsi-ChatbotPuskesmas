@@ -36,8 +36,9 @@
                                 <td class="text-center">{{ ($images->currentPage() - 1) * $images->perPage() + $loop->iteration }}</td>
                                 <td>
                                     @if($image->file_path && Storage::disk('public')->exists($image->file_path))
-                                    <img src="{{ Storage::url($image->file_path) }}" alt="Gambar Galeri" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $image->file_path) }}" alt="Gambar Galeri" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
                                     @else
+                                    
                                     <img src="https://placehold.co/100x100?text=No+Image" class="img-thumbnail" alt="No Image">
                                     @endif
                                 </td>
