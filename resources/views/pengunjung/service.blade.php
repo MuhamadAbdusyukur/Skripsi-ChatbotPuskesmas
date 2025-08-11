@@ -51,7 +51,7 @@
                             <i class="fa fa-child text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">Klaster 2</h4>
-                        <p class="mb-4">Melayani pemeriksaan ibu hamil bersalin dan nifas <br> Melayani pemeriksaaan kesehatan bayi dan ank balita <br> Melayani pemeriksaan anak pra-sekolah <br> Melayani Pemeriksaan anak usia sekolah <br> Melayani pemeriksaan remaja</p>
+                        <p class="mb-4">Melayani pemeriksaan ibu hamil bersalin dan nifas <br> Melayani pemeriksaaan kesehatan bayi dan ank balita <br> Melayani pemeriksaan anak pra-sekolah <br> Melayani Pemeriksaan anak usia sekolah <br> Melayani pemeriksaan remaja.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -66,7 +66,7 @@
                             <i class="fa fa-user text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">Klaster 3</h4>
-                        <p class="mb-4">Melayani pelayanan kesehatan usia dewasa (18-60 Tahun). <br> Melayani kesehatan usia lanjut (>60 tahun)</p>
+                        <p class="mb-4">Melayani pelayanan kesehatan usia dewasa (18-60 Tahun). <br> Melayani kesehatan usia lanjut (>60 tahun).</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -81,7 +81,7 @@
                             <i class="fa fa-database text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">Klaster 4</h4>
-                        <p class="mb-4">Penanggulangan penyakit menular <br> Kesehatan Lingkungan <br>Surveilans
+                        <p class="mb-4">Penanggulangan penyakit menular <br> Kesehatan Lingkungan <br>Surveilans.
                         </p>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     </div>
                 </div> --}}
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                    <div class="service-item rounded h-100 p-5 position-relative" style="background-color: #d7eef5;">
                         <span class="badge bg-secondary text-white position-absolute top-0 end-0 m-3 rounded-pill py-1 px-2"
                             style="font-size: 0.75rem;">
                             Layanan Diluar Klaster
