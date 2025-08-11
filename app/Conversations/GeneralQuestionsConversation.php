@@ -35,7 +35,7 @@ class GeneralQuestionsConversation extends Conversation
             return;
         }
 
-        $questionMessage = "Halo! Saya bot Puskesmas. Berikut beberapa pertanyaan yang sering diajukan:";
+        $questionMessage = "Halo! Saya bot Puskesmas. BBerikut beberapa pertanyaan yang sering ditanyakan. Silakan pilih salah satu di bawah atau ketik pertanyaan yang ingin kakak tanyakan:";
         $buttons = [];
 
         foreach ($popularKeywords as $keyword) {

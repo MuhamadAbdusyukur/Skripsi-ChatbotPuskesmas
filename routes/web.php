@@ -18,6 +18,8 @@ use App\Http\Controllers\QnaController;
 use BotMan\BotMan\Messages\Conversations\Conversation; // Pastikan ini ada
 use App\Conversations\TypoConfirmationConversation; // <-- IMPORT INI
 use App\Conversations\GeneralQuestionsConversation; // Import conversation baru
+use App\Conversations\HealthConsultationConversation; // Tambahkan ini
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie; // Tambahkan ini
 
@@ -177,22 +179,151 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
 
 
     // --- Langkah Baru: Ambil user_id dari cookie atau buat yang baru ---
-    $userId = Cookie::get('user_id');
-    if (!$userId) {
-        $userId = uniqid('user_');
-        Cookie::queue('user_id', $userId, 120); // Simpan ID di cookie selama 2 jam (120 menit)
-    }
+    // $userId = Cookie::get('user_id');
+    // if (!$userId) {
+    //     $userId = uniqid('user_');
+    //     Cookie::queue('user_id', $userId, 1); // Simpan ID di cookie selama 2 jam (120 menit)
+    // }
 
     // Ambil riwayat chat dari session
-    $chatHistory = Session::get("chat_history_{$userId}", []);
+    // $chatHistory = Session::get("chat_history_{$userId}", []);
 
     $response = null;
 
 
     // Simpan pesan pengguna ke session
-    if ($messageText) {
-        $chatHistory[] = ['sender' => 'user', 'message' => $messageText];
-    }
+    // if ($messageText) {
+    //     $chatHistory[] = ['sender' => 'user', 'message' => $messageText];
+    // }
+
+    // Asumsi:
+// $messageText adalah input teks dari pengguna.
+// Question dan Button adalah class yang sudah Anda definisikan.
+// response()->json() adalah fungsi untuk mengirim respons.
+
+/**
+ * 1️⃣ Tangani keyword awal "tips kesehatan harian"
+ * Menampilkan pilihan kategori tips dengan teks tombol yang lebih baik.
+ */
+if ($messageText === 'tips') {
+    $question = Question::create('Apa jenis tips kesehatan yang ingin Anda ketahui hari ini? Silakan pilih salah satu kategori di bawah ini. 👇')
+        ->addButtons([
+            Button::create('Tips Pencegahan Penyakit')->value('tips_pencegahan'),
+            Button::create('Tips Gaya Hidup')->value('tips_gaya_hidup'),
+            Button::create('Tips Pola Makan')->value('tips_pola_makan'),
+            Button::create('Tips Mental')->value('tips_mental'),
+            Button::create('Tips Fitness')->value('tips_fitness'),
+            Button::create('Kembali ke Menu Utama')->value('bantuan'),
+        ]);
+
+    return response()->json([
+        'reply' => [
+            'text' => $question->getText(),
+            'buttons' => $question->getButtons()
+        ]
+    ]);
+}
+
+/**
+ * 2️⃣ Tangani pilihan kategori tips dari pengguna
+ * Menggunakan format Markdown untuk membuat daftar agar tampilan rapi.
+ */
+if (in_array($messageText, ['tips_gaya_hidup', 'tips_pola_makan', 'tips_pencegahan', 'tips_mental', 'tips_fitness'])) {
+    $judulTips = '';
+    $daftarTips = '';
+
+    if ($messageText === 'tips_gaya_hidup') {
+    $judulTips = "📖 <b>Tips Gaya Hidup Sehat</b><br><br>";
+    $daftarTips = "
+    <ol>
+        <li><b>Tidur Cukup:</b> Pastikan tidur 7-8 jam setiap malam.</li>
+        <li><b>Olahraga Teratur:</b> Lakukan aktivitas fisik 30 menit per hari.</li>
+        <li><b>Kelola Stres:</b> Coba meditasi, berdoa, atau lakukan hobi untuk relaksasi.</li>
+        <li><b>Hidrasi:</b> Minum air putih minimal 8 gelas sehari.</li>
+        <li><b>Berjemur:</b> Dapatkan sinar matahari pagi minimal 10 menit.</li>
+        <li><b>Batasi Gadget:</b> Istirahatkan mata setiap 30 menit dari layar.</li>
+        <li><b>Jaga Postur Tubuh:</b> Duduk dan berdiri dengan posisi tegak.</li>
+    </ol>
+    <br><i>💡 Mau tips pola makan? Ketik <b>tips_pola_makan</b> atau untuk pencegahan penyakit ketik <b>tips_pencegahan</b></i>";
+}
+
+elseif ($messageText === 'tips_pola_makan') {
+    $judulTips = "🍎 <b>Tips Pola Makan Sehat</b><br><br>";
+    $daftarTips = "
+    <ol>
+        <li><b>Variasi Makanan:</b> Konsumsi buah, sayur, protein, dan karbohidrat seimbang.</li>
+        <li><b>Kurangi Gula dan Garam:</b> Batasi makanan manis dan asin.</li>
+        <li><b>Sarapan Sehat:</b> Jangan lewatkan sarapan untuk energi seharian.</li>
+        <li><b>Porsi Kecil:</b> Makan dengan porsi kecil tapi sering.</li>
+        <li><b>Perbanyak Serat:</b> Konsumsi sayur, buah, dan biji-bijian utuh.</li>
+        <li><b>Batasi Makanan Olahan:</b> Pilih makanan segar daripada instan.</li>
+        <li><b>Minum Air Putih:</b> Hindari minuman bersoda dan kemasan manis.</li>
+    </ol>
+    <br><i>💡 Untuk pencegahan penyakit, ketik <b>tips_pencegahan</b></i>";
+}
+
+elseif ($messageText === 'tips_pencegahan') {
+    $judulTips = "🛡️ <b>Tips Pencegahan Penyakit</b><br><br>";
+    $daftarTips = "
+    <ol>
+        <li><b>Cuci Tangan:</b> Selalu cuci tangan pakai sabun.</li>
+        <li><b>Vaksinasi:</b> Ikuti jadwal vaksinasi yang dianjurkan.</li>
+        <li><b>Jaga Kebersihan Lingkungan:</b> Bersihkan rumah dan hindari genangan air.</li>
+        <li><b>Hindari Kontak Langsung:</b> Jaga jarak dari orang yang sakit.</li>
+        <li><b>Konsumsi Makanan Bergizi:</b> Tingkatkan imunitas dengan makanan sehat.</li>
+        <li><b>Gunakan Masker:</b> Saat berada di tempat ramai atau saat sakit.</li>
+        <li><b>Cukup Istirahat:</b> Tubuh pulih lebih cepat saat cukup tidur.</li>
+    </ol>
+    <br><i>💡 Mau tips kesehatan mental? Ketik <b>tips_mental</b></i>";
+}
+
+elseif ($messageText === 'tips_mental') {
+    $judulTips = "🧠 <b>Tips Kesehatan Mental</b><br><br>";
+    $daftarTips = "
+    <ol>
+        <li><b>Luangkan Waktu untuk Diri Sendiri:</b> Lakukan hal yang Anda sukai.</li>
+        <li><b>Bicara dengan Orang Terpercaya:</b> Jangan pendam masalah sendiri.</li>
+        <li><b>Kurangi Overthinking:</b> Fokus pada hal yang bisa Anda kendalikan.</li>
+        <li><b>Praktik Bersyukur:</b> Catat 3 hal yang membuat Anda bersyukur setiap hari.</li>
+        <li><b>Istirahat dari Media Sosial:</b> Beri jeda agar pikiran lebih tenang.</li>
+        <li><b>Olahraga Ringan:</b> Jalan santai atau yoga untuk mengurangi stres.</li>
+        <li><b>Atur Pernafasan:</b> Tarik napas dalam-dalam untuk menenangkan diri.</li>
+    </ol>
+    <br><i>💡 Untuk tips gaya hidup sehat, ketik <b>tips_gaya_hidup</b></i>";
+}
+
+elseif ($messageText === 'tips_fitness') {
+    $judulTips = "🏃 <b>Tips Olahraga & Kebugaran</b><br><br>";
+    $daftarTips = "
+    <ol>
+        <li><b>Pemanasan:</b> Lakukan 5-10 menit sebelum olahraga.</li>
+        <li><b>Kombinasi Latihan:</b> Gabungkan kardio, kekuatan, dan fleksibilitas.</li>
+        <li><b>Jangan Terlalu Berat:</b> Tingkatkan intensitas bertahap.</li>
+        <li><b>Gunakan Alat yang Tepat:</b> Pastikan sepatu dan peralatan sesuai.</li>
+        <li><b>Pendinginan:</b> Regangkan otot setelah berolahraga.</li>
+        <li><b>Olahraga Bersama:</b> Lebih menyenangkan dengan teman.</li>
+        <li><b>Istirahat Cukup:</b> Jangan olahraga berlebihan tanpa recovery.</li>
+    </ol>
+    <br><i>💡 Mau tips pola makan sehat? Ketik <b>tips_pola_makan</b></i>";
+}
+
+
+    $question = Question::create($judulTips . "\n\n" . $daftarTips . "\n\nSemoga bermanfaat! Ada lagi yang bisa saya bantu?")
+        ->addButtons([
+            Button::create('Pilih Tips Lain')->value('tips'),
+            Button::create('Kembali ke Menu Utama')->value('bantuan'),
+        ]);
+
+    return response()->json([
+        'reply' => [
+            'text' => $question->getText(),
+            'buttons' => $question->getButtons()
+        ]
+    ]);
+}
+
+
+    
 
     if (in_array($messageText, ['mulai', 'halo', 'hallo', 'hi', 'bantuan'])) {
         $conversationInstance = new GeneralQuestionsConversation();
@@ -209,6 +340,13 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
     elseif ($messageText === 'kirim_link_staff') {
         $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/6281320296731';
     }
+
+    // --- TAMBAHKAN HANDLER INI ---
+    // elseif ($messageText === 'konsultasi') {
+    //     $botman->startConversation(new HealthConsultationConversation());
+    //     $response = 'Oke, mari kita mulai konsultasi. Apa keluhan utama yang Anda rasakan hari ini?';
+    // }
+    // --- AKHIR HANDLER BARU ---
 
     else {
         $foundQnaEntry = null;
@@ -239,16 +377,18 @@ Route::match(['get', 'post'], '/botman', function (Request $request) {
         }
 
         // Simpan respons bot ke session
-    if ($response) {
-        $chatHistory[] = ['sender' => 'bot', 'message' => $response];
-    }
-    Session::put("chat_history_{$userId}", $chatHistory);
+    // if ($response) {
+    //     $chatHistory[] = ['sender' => 'bot', 'message' => $response];
+    // }
+    // Session::put("chat_history_{$userId}", $chatHistory);
 
     }
     
     return response()->json(['reply' => $response]);
 
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+
 
 // --- Tambahkan rute baru untuk mendapatkan histori chat ---
 Route::get('/chatbot/history', function (Request $request) {

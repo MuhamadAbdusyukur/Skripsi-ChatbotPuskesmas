@@ -1379,7 +1379,7 @@ body.chatbot-open::before {
 </button> --}}
 
 <button id="toggleChatBtn" class="floating-chat-btn">
-    <img src="/home/img/Logo Chatbot.svg" alt="Chat" class="toggle-icon">
+    <img src="https://puskesmasbanjarwangi.site//public/home/img/Logo Chatbot.svg" alt="Chat" class="toggle-icon">
 </button>
 
 
@@ -1403,24 +1403,24 @@ const sendBtn = document.getElementById('sendBtn');
     let hasIntroduced = false;
 
     // --- Langkah Baru: Muat riwayat chat dari server ---
-    async function loadChatHistory() {
-        try {
-            const response = await fetch('/chatbot/history');
-            const history = await response.json();
+    // async function loadChatHistory() {
+    //     try {
+    //         const response = await fetch('/chatbot/history');
+    //         const history = await response.json();
             
-            history.forEach(log => {
-                appendMessage(log.sender, log.message);
-            });
-            if (history.length > 0) {
-                hasIntroduced = true;
-            }
-        } catch (error) {
-            console.error('Failed to load chat history:', error);
-        }
-    }
+    //         history.forEach(log => {
+    //             appendMessage(log.sender, log.message);
+    //         });
+    //         if (history.length > 0) {
+    //             hasIntroduced = true;
+    //         }
+    //     } catch (error) {
+    //         console.error('Failed to load chat history:', error);
+    //     }
+    // }
 
-    // Panggil fungsi ini saat halaman dimuat
-    loadChatHistory();
+    // // Panggil fungsi ini saat halaman dimuat
+    // loadChatHistory();
 
 
     // Fungsi untuk menampilkan pesan ke layar
@@ -1487,6 +1487,7 @@ function appendMessage(sender, content) {
 
         try {
             const response = await fetch('https://puskesmasbanjarwangi.site/public/botman', {
+            // const response = await fetch('botman', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1530,6 +1531,10 @@ function appendMessage(sender, content) {
                     {
                         text: 'Kontak Kami',
                         value: 'kontak'
+                    },
+                    { 
+                        text: 'Tips Sederhana', 
+                        value: 'tips' 
                     }
                 ]
             };
