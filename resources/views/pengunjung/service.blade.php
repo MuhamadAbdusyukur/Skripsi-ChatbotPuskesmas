@@ -33,11 +33,10 @@
                         </span>
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
-                            <i class="fa fa-heartbeat text-primary fs-4"></i>
+                            <i class=" fa fa-building text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Poli Umum</h4> {{-- Ubah judul agar lebih spesifik --}}
-                        <p class="mb-4">Melayani pemeriksaan, diagnosis, pengobatan berbagai penyakit umum, serta
-                            konsultasi kesehatan dasar.</p>
+                        <h4 class="mb-3">Klaster 1</h4> {{-- Ubah judul agar lebih spesifik --}}
+                        <p class="mb-4">Manajemen puskesmas.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -51,9 +50,8 @@
                             style="width: 65px; height: 65px;">
                             <i class="fa fa-child text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Imunisasi</h4>
-                        <p class="mb-4">Pelayanan kesehatan bagi ibu dan anak-anak, untuk mencegah penyebaran penyakit
-                            yang dapat mengancam kesehatan, seperti campak, polio dan hepatitis.</p>
+                        <h4 class="mb-3">Klaster 2</h4>
+                        <p class="mb-4">Melayani pemeriksaan ibu hamil bersalin dan nifas <br> Melayani pemeriksaaan kesehatan bayi dan ank balita <br> Melayani pemeriksaan anak pra-sekolah <br> Melayani Pemeriksaan anak usia sekolah <br> Melayani pemeriksaan remaja</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -65,11 +63,10 @@
                         </span>
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
-                            <i class="fa fa-tooth text-primary fs-4"></i>
+                            <i class="fa fa-user text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Kesehatan Gigi</h4>
-                        <p class="mb-4">Memberikan perawatan gigi dan mulut untuk mencegah terjadinya masalah kesehatan
-                            gigi yang lebih serius di masa depan</p>
+                        <h4 class="mb-3">Klaster 3</h4>
+                        <p class="mb-4">Melayani pelayanan kesehatan usia dewasa (18-60 Tahun). <br> Melayani kesehatan usia lanjut (>60 tahun)</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -81,15 +78,14 @@
                         </span>
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
-                            <i class="fa fa-leaf text-primary fs-4"></i>
+                            <i class="fa fa-database text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Kesehatan Lingkungan</h4>
-                        <p class="mb-4">Mengawasi kebersihan lingkungan, sanitasi lingkungan, dan pengawasan penyediaan
-                            air bersih untuk mencegah terjadinya penyakit yang disebabkan oleh lingkungan yang tidak sehat
+                        <h4 class="mb-3">Klaster 4</h4>
+                        <p class="mb-4">Penanggulangan penyakit menular <br> Kesehatan Lingkungan <br>Surveilans
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                {{-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="service-item bg-light rounded h-100 p-5 position-relative">
                         <span
                             class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
@@ -121,9 +117,13 @@
                             konseling tentang kesehatan reproduksi untuk membantu ibu dan pasangan dalam merencanakan
                             keluarga dan menjaga kesehatan reproduksi</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        <span class="badge bg-secondary text-white position-absolute top-0 end-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Layanan Diluar Klaster
+                        </span>
                         <span
                             class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
                             style="font-size: 0.75rem;">
@@ -153,9 +153,8 @@
                             style="width: 65px; height: 65px;">
                             <i class="fa fa-pills text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Farmasi</h4>
-                        <p class="mb-4">Penyediaan obat-obatan esensial, informasi obat, dan konseling penggunaan obat
-                            yang tepat untuk pasien</p>
+                        <h4 class="mb-3">PONED</h4>
+                        <p class="mb-4">Melayani pelayanan pemeriksaan kesehatan gigi dan mulut <br> melayani pelayanan ke farmasian br melayani pelayanan laboratorium melayani pelauanan PONED melayani pelayanan unit gawat darurat, melayani pelayanan rawat inap</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
