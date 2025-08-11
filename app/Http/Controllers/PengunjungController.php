@@ -52,12 +52,15 @@ class PengunjungController extends Controller
         // ------------------------------------
 
 
+        $dokters = Dokter::latest()->limit(3)->get();
+
         return view('pengunjung.index', [
             "title" => "Beranda",
             'pengunjung' => $pengunjung,
             'pengunjungbesok' => $pengunjungbesok,
             'semuapengunjung' => $semuapengunjung,
-            'articles' => $articles
+            'articles' => $articles,
+             "dokters" => $dokters, // Variabel dokters dikirim ke view
         ]);
     }
 
@@ -117,7 +120,11 @@ class PengunjungController extends Controller
         "title" => "Pendaftaran Pasien",
         "polis" => $polis,
     ]);
+
+    
 }
+
+
 
 
 

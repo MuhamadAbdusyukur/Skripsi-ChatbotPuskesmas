@@ -19,12 +19,10 @@
     <!-- Team Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            {{-- Header dinamis dari desain tim --}}
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <p class="d-inline-block border rounded-pill py-1 px-4">Dokter</p>
                 <h1>Tenaga Medis Berpengalaman</h1>
             </div>
-
             <div class="row g-4">
                 {{-- Loop untuk menampilkan data dokter dari database --}}
                 @forelse($dokters as $dokter)
@@ -52,7 +50,9 @@
                     </div>
                 @endforelse
             </div>
+            </div>
         </div>
+        
     </div>
     <!-- Team End -->
 @endsection

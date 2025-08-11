@@ -402,53 +402,32 @@
                 <h1>Tenaga Medis Berpengalaman</h1>
             </div>
             <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item position-relative rounded overflow-hidden">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('home/img/team-1.jpg') }}" alt="">
-                        </div>
-                        <div class="team-text bg-light text-center p-4">
-                            <h5>Fitriani Kusumawati</h5>
-                            <p class="text-primary">Departemen Kesehatan Anak</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item position-relative rounded overflow-hidden">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('home/img/team-2.jpg') }}" alt="">
-                        </div>
-                        <div class="team-text bg-light text-center p-4">
-                            <h5>Wijaya Pranata</h5>
-                            <p class="text-primary">Departemen Kesehatan Jiwa</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item position-relative rounded overflow-hidden">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('home/img/team-3.jpg') }}" alt="">
-                        </div>
-                        <div class="team-text bg-light text-center p-4">
-                            <h5>Dina Ayuningtyas</h5>
-                            <p class="text-primary">Departemen Urologi</p>
+                {{-- Loop untuk menampilkan data dokter dari database --}}
+                @forelse($dokters as $dokter)
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item position-relative rounded overflow-hidden">
+                            <div class="overflow-hidden">
+                                @if ($dokter->foto)
+                                    <img class="img-fluid" src="{{ asset('storage/' . $dokter->foto) }}"
+                                        alt="{{ $dokter->nama }}" style="width: 100%; height: 250px; object-fit: cover;">
+                                @else
+                                    <img class="img-fluid" src="https://placehold.co/600x400/cccccc/333333?text=No+Image"
+                                        alt="No Image Available" style="width: 100%; height: 250px; object-fit: cover;">
+                                @endif
+                            </div>
+                            <div class="team-text bg-light text-center p-4">
+                                <h5 class="fs-6">{{ $dokter->nama }}</h5>
+                                <p class="text-primary small fw-normal mb-1">{{ $dokter->profesi }}</p>
+                                <p class="text-muted small fw-normal">{{ $dokter->jadwal }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item position-relative rounded overflow-hidden">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('home/img/team-4.jpg') }}" alt="">
-                        </div>
-                        <div class="team-text bg-light text-center p-4">
-                            <h5>Ahmad Setiawan</h5>
-                            <p class="text-primary">Departemen Radiologi</p>
-                        </div>
+                @empty
+                    <div class="col-12 text-center py-5">
+                        <p class="lead">Tidak ada data dokter saat ini.</p>
                     </div>
-                </div>
-                <div class="text-center mt-5 wow fadeIn" data-wow-delay="0.1s"> {{-- Tambahkan wow fadeIn untuk animasi --}}
-            <a class="btn btn-primary rounded-pill py-3 px-5 mt-1 btn-readmore-responsive" href="{{ url('/dokter') }}">Lihat Semua Dokter</a>
-        </div>
+                @endforelse
+            </div>
             </div>
         </div>
         
