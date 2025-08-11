@@ -66,6 +66,9 @@
                     <a href="{{ url('/admin/user') }}"
                         class="nav-item nav-link {{ $title === 'Daftar Pengguna' ? 'active' : '' }}"><i
                             class="fa fa-user me-2"></i>Daftar Pengguna</a>
+                    <a href="{{ url('/qna') }}"
+                        class="nav-item nav-link {{ $title === 'Kelola Chatbot' ? 'active' : '' }}"><i
+                            class="fa fa-comments me-2"></i>Kelola Chatbot</a>
                     <a href="{{ url('/admin/articles') }}"
                         class="nav-item nav-link {{ $title === 'Kelola Berita' ? 'active' : '' }}"><i
                             class="fa fa-newspaper me-2"></i>Kelola Berita</a>
@@ -75,9 +78,9 @@
                     <a href="{{ route('admin.dokter.index') }}"
                         class="nav-item nav-link {{ $title === 'Kelola Dokter' ? 'active' : '' }}"><i 
                             class="fa fa-user-md me-2"></i>Kelola Dokter</a>
-                    <a href="{{ url('/qna') }}"
-                        class="nav-item nav-link {{ $title === 'Kelola Chatbot' ? 'active' : '' }}"><i
-                            class="fa fa-comments me-2"></i>Kelola Chatbot</a>
+                    <a href="{{ route('admin.feedback') }}"
+                        class="nav-item nav-link {{ $title === 'Daftar Kritik dan Saran' ? 'active' : '' }}"><i 
+                            class="fa fa-bullhorn me-2"></i>Lihat Saran</a>        
                 </div>
             </nav>
         </div>

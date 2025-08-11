@@ -71,6 +71,7 @@ Route::get('/about', [PengunjungController::class, 'about']);
 Route::get('/service', [PengunjungController::class, 'service']);
 Route::get('/dokter', [PengunjungController::class, 'dokter']);
 Route::get('/contact', [PengunjungController::class, 'contact'])->name('contact');
+Route::post('/contact', [PengunjungController::class, 'submitFeedback'])->name('contact.submit');
 
 
 // --- Tambahkan rute untuk artikel publik di sini ---
@@ -107,6 +108,14 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/admin/poli/{id}', [AdminController::class, 'poliupdate'])->name('poli.update');
         Route::delete('/admin/poli/{id}', [AdminController::class, 'polidelete'])->name('poli.delete');
 
+
+       
+
+        Route::get('/admin/feedback', [AdminController::class, 'showFeedback'])->name('admin.feedback');
+        Route::delete('/admin/feedback/{id}', [AdminController::class, 'deleteFeedback'])->name('admin.feedback.delete');
+        Route::get('/admin/feedback/export', [AdminController::class, 'exportPdf'])->name('admin.feedback.export');
+
+
         Route::prefix('admin')->name('admin.')->group(function () {
         // Rute untuk Kelola Dokter
         Route::resource('dokter', DokterController::class);
@@ -116,6 +125,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Rute untuk Kelola Galeri
         Route::resource('gallery', GalleryController::class);
+
+
+
     });
     });
 

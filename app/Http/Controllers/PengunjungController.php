@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\Models\Article;
 use App\Models\GalleryImage;
 use App\Models\Dokter; // Jangan lupa tambahkan ini
+use App\Models\Feedback; // Pastikan ini ada
+
 
 class PengunjungController extends Controller
 {
@@ -220,8 +222,28 @@ public function dokter()
         // ----------------------------------------------------------------------
     }
 
-    
 
+    
+    // --- TAMBAHKAN METODE INI DI SINI ---
+    public function submitFeedback(Request $request)
+    {
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'layanan' => 'required|string|max:255',
+            'pesan' => 'required|string|max:500',
+        ]);
+        
+        // Simpan data ke database
+        Feedback::create($validatedData);
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->back()->with('success', 'Terima kasih! Kritik dan saran Anda berhasil kami kirimkan.');
+    }
+
+
+    
 
 
 

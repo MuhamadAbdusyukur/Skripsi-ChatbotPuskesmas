@@ -138,7 +138,7 @@
                             segera, sebelum rujukan ke rumah sakit.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                {{-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item rounded h-100 p-5 position-relative" style="background-color: #d7eef5;">
                         <span class="badge bg-secondary text-white position-absolute top-0 end-0 m-3 rounded-pill py-1 px-2"
                             style="font-size: 0.75rem;">
@@ -156,7 +156,7 @@
                         <h4 class="mb-3">PONED</h4>
                         <p class="mb-4">Melayani pelayanan pemeriksaan kesehatan gigi dan mulut <br> melayani pelayanan ke farmasian br melayani pelayanan laboratorium melayani pelauanan PONED melayani pelayanan unit gawat darurat, melayani pelayanan rawat inap</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item rounded h-100 p-5 position-relative" style="background-color: #d7eef5;">
                         <span

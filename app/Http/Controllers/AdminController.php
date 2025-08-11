@@ -10,6 +10,8 @@ use App\Models\Poli;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Article;
+use App\Models\Feedback;
+
 // use PDF; // Pastikan ini ada di atas
 use Barryvdh\DomPDF\Facade\Pdf; // Tambahkan ini jika belum ada
 
@@ -426,6 +428,71 @@ public function downloadPdfPoli($id)
     // Kembalikan file PDF sebagai respons download
     return $pdf->download($pdfFileName);
 }
+
+
+
+// --- TAMBAHKAN METODE INI DI SINI ---
+    public function showFeedback(Request $request)
+    {
+        $query = Feedback::orderBy('created_at', 'desc');
+
+        if ($request->has('filter')) {
+            $filter = $request->filter;
+            if ($filter === 'hari') {
+                $query->whereDate('created_at', today());
+            } elseif ($filter === 'minggu') {
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+            } elseif ($filter === 'bulan') {
+                $query->whereMonth('created_at', now()->month);
+            } elseif ($filter === 'tahun') {
+                $query->whereYear('created_at', now()->year);
+            }
+        }
+        
+        $feedbacks = $query->get();
+
+        return view('admin.feedback.index', [
+            "title" => "Daftar Kritik dan Saran",
+            "feedbacks" => $feedbacks
+        ]);
+    }
+
+    public function deleteFeedback($id)
+    {
+        $feedback = Feedback::find($id);
+
+        if (!$feedback) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        $feedback->delete();
+
+        return redirect()->back()->with('success', 'Kritik dan saran berhasil dihapus.');
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $query = Feedback::orderBy('created_at', 'desc');
+        
+        // Logika filter seperti di method showFeedback()
+        if ($request->has('filter')) {
+            $filter = $request->filter;
+            if ($filter === 'hari') {
+                $query->whereDate('created_at', today());
+            } elseif ($filter === 'minggu') {
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+            } elseif ($filter === 'bulan') {
+                $query->whereMonth('created_at', now()->month);
+            } elseif ($filter === 'tahun') {
+                $query->whereYear('created_at', now()->year);
+            }
+        }
+
+        $feedbacks = $query->get();
+        $pdf = Pdf::loadView('admin.feedback.report_pdf', compact('feedbacks'));
+        
+        return $pdf->download('laporan_kritik_dan_saran.pdf');
+    }
 
 
 }
