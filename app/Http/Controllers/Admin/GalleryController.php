@@ -15,7 +15,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $images = GalleryImage::orderBy('order', 'asc')->paginate(10); // Ambil semua gambar
+        $images = GalleryImage::orderBy('created_at', 'asc')->paginate(10); // Ambil semua gambar
         $title = 'Kelola Galeri'; // Judul halaman untuk admin galeri
         return view('admin.gallery.index', compact('images', 'title'));
     }

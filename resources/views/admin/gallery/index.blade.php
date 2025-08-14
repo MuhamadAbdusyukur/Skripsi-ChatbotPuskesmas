@@ -12,6 +12,7 @@
                     </a>
                 </div>
 
+                {{-- Notifikasi --}}
                 {{-- @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="fa fa-check-circle me-2"></i>{{ session('success') }}
@@ -27,29 +28,44 @@
                                 <th scope="col">Gambar</th>
                                 <th scope="col">Deskripsi</th>
                                 <th scope="col">Urutan</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col" class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($images as $image)
                             <tr>
-                                <td class="text-center">{{ ($images->currentPage() - 1) * $images->perPage() + $loop->iteration }}</td>
+                                <td class="text-center">
+                                    {{ ($images->currentPage() - 1) * $images->perPage() + $loop->iteration }}
+                                </td>
                                 <td>
                                     @if($image->file_path && Storage::disk('public')->exists($image->file_path))
-                                    <img src="{{ asset('storage/' . $image->file_path) }}" alt="Gambar Galeri" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $image->file_path) }}" 
+                                         alt="Gambar Galeri" 
+                                         class="img-thumbnail" 
+                                         style="width: 100px; height: 100px; object-fit: cover;">
                                     @else
-                                    
-                                    <img src="https://placehold.co/100x100?text=No+Image" class="img-thumbnail" alt="No Image">
+                                    <img src="https://placehold.co/100x100?text=No+Image" 
+                                         class="img-thumbnail" 
+                                         alt="No Image">
                                     @endif
                                 </td>
                                 <td>{{ $image->description ?? '-' }}</td>
                                 <td>{{ $image->order ?? '-' }}</td>
-                                <td>
-                                    <div class="d-flex flex-wrap gap-2 justify-content-center">
-                                        <a href="{{ route('admin.gallery.edit', $image->id) }}" class="btn btn-sm btn-warning" title="Edit Data"><i class="fa fa-edit"></i></a>
-                                        <form action="{{ route('admin.gallery.destroy', $image->id) }}" method="POST" style="display:inline-block;">
+                                <td class="text-center">
+                                    <div class="d-flex gap-2 justify-content-center">
+                                        <a href="{{ route('admin.gallery.edit', $image->id) }}" 
+                                           class="btn btn-sm btn-warning" 
+                                           title="Edit Data">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('admin.gallery.destroy', $image->id) }}" 
+                                              method="POST" 
+                                              style="display:inline-block;">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="confirmDelete(event)" title="Hapus Data">
+                                            <button type="submit" 
+                                                    class="btn btn-sm btn-danger" 
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');" 
+                                                    title="Hapus Data">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -58,17 +74,32 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center py-4">Tidak ada gambar galeri ditemukan.</td>
+                                <td colspan="5" class="text-center py-4">
+                                    Tidak ada gambar galeri ditemukan.
+                                </td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
+
+                    {{-- Pagination kecil --}}
                     <div class="d-flex justify-content-center mt-4">
-                        {{ $images->links() }}
+                        {{ $images->onEachSide(1)->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{{-- CSS Pagination Kecil --}}
+<style>
+    .pagination .page-link {
+        padding: 4px 10px; /* kecilkan padding */
+        font-size: 0.875rem; /* kecilkan font */
+    }
+    .pagination .page-item {
+        margin: 0 2px; /* jarak antar tombol */
+    }
+</style>
 @endsection

@@ -26,7 +26,7 @@
 
                 {{-- === Bagian Tabel Responsif === --}}
                 <div class="table-responsive"> {{-- Ini yang membuat tabel scrollable di mobile --}}
-                    <table class="table table-striped table-hover table-bordered align-middle"> {{-- Menambahkan class Bootstrap --}}
+                    <table class="table table-striped table-hover align-middle"> {{-- Menambahkan class Bootstrap --}}
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">No</th> {{-- Tambahkan # untuk nomor urut --}}
