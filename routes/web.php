@@ -67,6 +67,10 @@ Route::get('/', [PengunjungController::class, 'index']);
 Route::get('/pendaftaran', [PengunjungController::class, 'create'])->name('pengunjung.create');
 Route::get('/', [PengunjungController::class, 'index'])->name('home');
 Route::post('/pendaftaran', [PengunjungController::class, 'store'])->name('pengunjung.store');
+
+
+Route::post('/chatbot/daftar-pasien', [AdminController::class, 'storeFromChatbot'])->name('chatbot.daftar');
+
 Route::get('/about', [PengunjungController::class, 'about']);
 Route::get('/service', [PengunjungController::class, 'service']);
 Route::get('/dokter', [PengunjungController::class, 'dokter']);
@@ -350,7 +354,7 @@ elseif ($messageText === 'tips_fitness') {
     }
     
     elseif ($messageText === 'kirim_link_staff') {
-        $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/6281320296731';
+        $response = 'Silakan hubungi staf kami melalui WhatsApp: https://wa.me/6282117175388';
     }
 
     // --- TAMBAHKAN HANDLER INI ---
@@ -378,7 +382,7 @@ elseif ($messageText === 'tips_fitness') {
         } else {
             $question = Question::create('Maaf, saya tidak mengerti. Mungkin Anda bisa mencoba beberapa opsi di bawah ini:')
                 ->addButtons([
-                    Button::create('Bantuan')->value('mulai'),
+                    Button::create('Bantuan')->value('bantuan'),
                     Button::create('Hubungi Staf')->url('https://wa.me/6281320296731?text=Halo%20Admin.')->additionalParameters(['target' => '_blank']),
                 ]);
             

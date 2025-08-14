@@ -557,7 +557,7 @@
 
             {{-- Tombol pendaftaran --}}
 <a href="{{ url('/pendaftaran') }}" class="btn btn-primary rounded-0 py-4 px-lg-4 d-none d-lg-block">
-    Pendaftaran Pasien<i class="fa fa-arrow-right ms-3"></i>
+    Pra-Pendaftaran<i class="fa fa-arrow-right ms-3"></i>
 </a>
 <a href="{{ url('/pendaftaran') }}"
     class="btn btn-primary rounded-0 d-block d-lg-none d-flex justify-content-center align-items-center text-center"
@@ -596,10 +596,10 @@
 
 
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <h5 class="text-light mb-4">Hubungi Kami</h5>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Kec. Banjarwangi, Garut</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+628 211 717 5388 </p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+62 821-1717-5388 </p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>laporpkmbanjarwangi@gmail.com</p>
                     <div class="d-flex pt-2">
 
@@ -616,18 +616,17 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Pelayanan</h5>
-                    <a class="btn btn-link">Cardiology</a>
-                    <a class="btn btn-link">Pulmonary</a>
-                    <a class="btn btn-link">Neurology</a>
-                    <a class="btn btn-link">Orthopedics</a>
-                    <a class="btn btn-link">Laboratory</a>
+                    <a class="btn btn-link" href="{{ url('/service#jenis_layanan') }}">Jenis Layanan</a>
+                    <a class="btn btn-link" href="{{ url('/service#prosedur_pelayanan') }}">Prosedur Pelayanan</a>
+                    <a class="btn btn-link" href="{{ url('/service#alur_pendaftaran') }}">Alur Pendaftaran</a>
+                    <a class="btn btn-link" href="{{ url('/service#biaya_pelayanan') }}">Biaya Pelayanan</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <h5 class="text-light mb-4">Kunjungi</h5>
                     <a class="btn btn-link" href="{{ url('/about') }}">Tentang Kami</a>
                     <a class="btn btn-link" href="{{ url('/service') }}">Layanan Kami</a>
                     <a class="btn btn-link" href="{{ url('/contact') }}">Hubungi Kami</a>
-                    <a class="btn btn-link" href="{{ url('/pendaftaran') }}">Pendaftaran Pasien</a>
+                    <a class="btn btn-link" href="{{ url('/pendaftaran') }}">Pra-Pendaftaran</a>
                 </div>
 
             </div>
@@ -1345,6 +1344,139 @@ body.chatbot-open::before {
     padding: 0;
     margin: 0;
 }
+
+
+/* =========================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  /* display: flex;  */
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* beri padding agar tidak nempel layar */
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px 30px 25px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px; /* lebarnya agak lebih besar untuk desktop */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease;
+  box-sizing: border-box;
+  max-height: 90vh; /* agar tidak melebihi viewport */
+  overflow-y: auto; /* scroll jika konten terlalu tinggi */
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close-btn:hover {
+  color: #000;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+.modal-content label {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  margin-top: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #ccc;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+  resize: vertical;
+}
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
+}
+
+.modal-content textarea {
+  min-height: 80px;
+}
+
+.modal-content button {
+  margin-top: 25px;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.modal-content button:hover {
+  background: #218838;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .modal-content {
+    max-width: 100%;
+    padding: 20px 20px 15px;
+  }
+  .close-btn {
+    top: 12px;
+    right: 15px;
+    font-size: 24px;
+  }
+  .modal-content label {
+    font-size: 0.95rem;
+  }
+  .modal-content input,
+  .modal-content textarea,
+  .modal-content select {
+    font-size: 0.95rem;
+  }
+  .modal-content button {
+    font-size: 1rem;
+  }
+}
+
+/* Animasi muncul */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
 </style>
 
 
@@ -1383,6 +1515,65 @@ body.chatbot-open::before {
 </button>
 
 
+{{-- ============================ --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<div id="formModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Silahkan Mengisi Form <br>Pra-Pendaftaran Berikut</h3>
+        <form id="pendaftaranForm">
+            <input type="text" class="form-control" id="nik" name="nik" placeholder="Nomor Induk Kependudukan" required minlength="16" maxlength="16" pattern="\d{16}" oninvalid="this.setCustomValidity('NIK harus terdiri dari 16 digit angka.')"
+               oninput="this.setCustomValidity('')">
+
+            <label>No KK:</label>
+            <input type="text" class="form-control" id="no_kk" name="no_kk" 
+               placeholder="Nomor Kartu Keluarga" required 
+               minlength="16" maxlength="16" pattern="\d{16}"
+               oninvalid="this.setCustomValidity('Nomor KK harus terdiri dari 16 digit angka.')"
+               oninput="this.setCustomValidity('')">
+
+            <label>Nama:</label>
+            <input type="text" id="nama" placeholder="Nama Lengkap" required oninvalid="this.setCustomValidity('Nama wajib diisi.')"
+               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Nomor telepon wajib diisi.')"
+               oninput="this.setCustomValidity('')">
+
+            <label>Telepon:</label>
+            <input type="text" id="telepon" placeholder="Nomor Telepon/Wa" required oninvalid="this.setCustomValidity('Telepon wajib diisi.')"
+                  oninput="this.setCustomValidity('')">
+
+            <label>Alamat:</label>
+            <textarea class="form-control" id="alamat" name="alamat" 
+                  placeholder="Alamat" style="height: 100px" required
+                  oninvalid="this.setCustomValidity('Alamat wajib diisi.')"
+                  oninput="this.setCustomValidity('')"></textarea>
+
+            <label>Keluhan:</label>
+            <textarea id="keluhan" placeholder="Tulis keluhan Anda di sini..." required 
+            oninvalid="this.setCustomValidity('Keluhan wajib diisi.')"
+               oninput="this.setCustomValidity('')"></textarea>
+
+            <label>Tanggal Kunjungan:</label>
+            <input type="date" id="tgl_kunjung" required 
+            oninvalid="this.setCustomValidity('Tanggal Kunjungan wajib diisi.')"
+                  oninput="this.setCustomValidity('')">
+
+            <label>Pilih Poli:</label>
+            <select id="poli_id">
+                @foreach($poli as $p)
+                    <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                @endforeach
+            </select>
+
+            <button type="submit">Daftar</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
 {{-- JS CHATBOT --}}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1393,6 +1584,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tooltip = document.getElementById('botmanTooltip'); // Dapatkan elemen tooltip disini
     const userInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
+
+
     
     
     // Pastikan Anda memiliki meta tag CSRF token di HTML Anda
@@ -1401,6 +1594,11 @@ const sendBtn = document.getElementById('sendBtn');
 
     let isChatOpen = false;
     let hasIntroduced = false;
+
+    // Sanitizer helper untuk mencegah XSS
+    function sanitizeHTML(input) {
+        return DOMPurify.sanitize(input, { ALLOWED_TAGS: ['b','i','u','strong','em','br','p','a'], ALLOWED_ATTR: ['href','target'] });
+    }
 
     // --- Langkah Baru: Muat riwayat chat dari server ---
     // async function loadChatHistory() {
@@ -1429,25 +1627,24 @@ const sendBtn = document.getElementById('sendBtn');
 function appendMessage(sender, content) {
     const chatMessages = document.getElementById('chatMessages');
     const messageContainer = document.createElement('div');
-    
+
     if (sender === 'user') {
         messageContainer.classList.add('message-bubble', 'user-message');
-        messageContainer.innerHTML = content;
+        messageContainer.textContent = content;
     } else if (sender === 'bot') {
         messageContainer.classList.add('message-bubble', 'bot-message');
-        
-        // Tambahkan avatar untuk pesan bot
+
         const avatar = document.createElement('img');
         avatar.classList.add('bot-avatar');
         avatar.src = 'https://puskesmasbanjarwangi.site//public/home/img/Logo Chatbot.svg';
         const textContent = document.createElement('div');
         textContent.classList.add('bot-text');
-        
+
         if (typeof content === 'object' && content.text && content.buttons) {
             textContent.innerHTML = `<p>${content.text}</p>`;
             const buttonContainer = document.createElement('div');
             buttonContainer.classList.add('button-container');
-            
+
             content.buttons.forEach(button => {
                 const buttonElement = document.createElement(button.url ? 'a' : 'button');
                 buttonElement.classList.add('chat-button');
@@ -1457,10 +1654,16 @@ function appendMessage(sender, content) {
                     buttonElement.href = button.url;
                     buttonElement.target = '_blank';
                 } else {
-                    buttonElement.addEventListener('click', () => {
-                        userInput.value = button.value;
-                        sendMessage();
-                    });
+                    if (button.value && button.value.toLowerCase() === 'daftar pasien') {
+                        buttonElement.addEventListener('click', () => {
+                            document.getElementById('formModal').style.display = 'flex';
+                        });
+                    } else {
+                        buttonElement.addEventListener('click', () => {
+                            userInput.value = button.value;
+                            sendMessage();
+                        });
+                    }
                 }
                 buttonContainer.appendChild(buttonElement);
             });
@@ -1468,7 +1671,7 @@ function appendMessage(sender, content) {
         } else {
             textContent.innerHTML = content;
         }
-        
+
         messageContainer.appendChild(avatar);
         messageContainer.appendChild(textContent);
     }
@@ -1477,6 +1680,114 @@ function appendMessage(sender, content) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// Fungsi tutup modal
+document.querySelector('.close-btn').addEventListener('click', function() {
+    document.getElementById('formModal').style.display = 'none';
+});
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('formModal');
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// Tangani submit form
+document.getElementById('pendaftaranForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = {
+        nik: document.getElementById('nik').value,
+        nama: document.getElementById('nama').value,
+        no_kk: document.getElementById('no_kk').value,
+        telepon: document.getElementById('telepon').value,
+        alamat: document.getElementById('alamat').value,
+        keluhan: document.getElementById('keluhan').value,
+        tgl_kunjung: document.getElementById('tgl_kunjung').value,
+        poli_id: document.getElementById('poli_id').value
+    };
+
+    fetch('/chatbot/daftar-pasien', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+                'Accept': 'application/json',
+
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+    let message;
+    let buttons = [];
+
+    if (data.success) {
+        message = `✅ ${data.message}`;
+    } else {
+        let errorMessage = "Terjadi kesalahan saat mengirim data. Silakan coba lagi atau hubungi staf .";
+        
+        if (data.message) {
+            if (data.message.includes('Duplicate entry')) {
+                errorMessage = "Pendaftaran gagal. NIK yang Anda masukkan sudah terdaftar.";
+            } else if (data.message.includes('Numeric value out of range')) {
+                errorMessage = "Pendaftaran gagal. Nomor telepon yang Anda masukkan terlalu panjang atau tidak valid.";
+            } else if (data.message.includes('required')) {
+                errorMessage = "Pendaftaran gagal. Mohon lengkapi semua kolom yang wajib diisi.";
+            } else {
+                errorMessage = "Terjadi kesalahan. Silakan hubungi admin.";
+            }
+        }
+        
+        message = `❌ Gagal: ${errorMessage}`;
+        
+        // Tombol untuk mencoba lagi hanya muncul saat gagal
+        buttons.push({
+            text: 'Pra-Pendaftaran',
+            value: 'daftar pasien'},
+        {
+            text: 'Hubungi Staf',
+            value: 'kontak'
+        }
+    );
+    }
+
+    // Tutup modal
+    document.getElementById('formModal').style.display = 'none';
+
+    // Kirim pesan ke chat dengan tombol jika ada
+    if (buttons.length > 0) {
+        appendMessage('bot', { text: message, buttons: buttons });
+    } else {
+        appendMessage('bot', message);
+    }
+})
+.catch(err => {
+    // Tutup modal jika ada error jaringan
+    document.getElementById('formModal').style.display = 'none';
+    
+    // Siapkan pesan dan tombol terpisah untuk error jaringan
+    const errorMessage = `⚠️ Error: ${err.message}. Periksa koneksi internet Anda atau coba lagi.`;
+    const errorButtons = [{
+        text: 'Pra-Pendaftaran',
+        value: 'daftar pasien'
+    }];
+    
+    appendMessage('bot', { text: errorMessage, buttons: errorButtons });
+});
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================================================
     // Fungsi untuk mengirim pesan ke BotMan backend
     async function sendMessage() {
         const message = userInput.value.trim();
@@ -1486,8 +1797,8 @@ function appendMessage(sender, content) {
         userInput.value = '';
 
         try {
-            const response = await fetch('https://puskesmasbanjarwangi.site/public/botman', {
-            // const response = await fetch('botman', {
+            //const response = await fetch('https://puskesmasbanjarwangi.site/public/botman', {
+             const response = await fetch('botman', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1520,6 +1831,10 @@ function appendMessage(sender, content) {
             const welcomeMessageWithButtons = {
                 text: "Halo kak! 👋 Ada yang bisa aku bantu hari ini? Berikut beberapa pertanyaan yang sering ditanyakan. Silakan pilih salah satu di bawah atau ketik pertanyaan yang ingin kakak tanyakan:",
                 buttons: [
+                    { 
+                        text: 'Pra-Pendaftaran',  
+                        value: 'daftar pasien'  
+                    },
                     {
                         text: 'Jadwal Dokter',
                         value: 'jadwal dokter'
@@ -1535,7 +1850,7 @@ function appendMessage(sender, content) {
                     { 
                         text: 'Tips Sederhana', 
                         value: 'tips' 
-                    }
+                    } 
                 ]
             };
 
@@ -1562,6 +1877,7 @@ function appendMessage(sender, content) {
     // Event listener untuk tombol 'Enter' pada keyboard
     userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
+            e.preventDefault();
             sendMessage();
         }
     });

@@ -92,51 +92,51 @@
                 </div>
             </div> --}}
             <div class="col-lg-12 wow fadeIn" data-wow-delay="0.5s">
-            <div class="owl-carousel header-carousel">
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/1.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Umum</h1> --}}
+                <div class="owl-carousel header-carousel">
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/1.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Umum</h1> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/2.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Ibu dan Anak</h1> --}}
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/2.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Ibu dan Anak</h1> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/3.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/3.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/4.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/4.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/5.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/5.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/6.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/6.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('home/img/7.png') }}" alt="">
-                    <div class="owl-carousel-text">
-                        {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ asset('home/img/7.png') }}" alt="">
+                        <div class="owl-carousel-text">
+                            {{-- <h1 class="display-1 text-white mb-0">Pelayanan Kesehatan Lingkungan</h1> --}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <!-- Header End -->
@@ -233,7 +233,8 @@
                         <i class="far fa-check-circle text-primary me-3 flex-shrink-0"></i>
                         <p class="mb-0 flex-grow-1">Pelayanan kesehatan terbaik dan ramah kepada pasien</p>
                     </div>
-                    <a class="btn btn-primary rounded-pill py-3 px-5 mt-3 btn-readmore-responsive" href="{{ url('/about') }}">Lihat Semua tentang Kami</a>
+                    <a class="btn btn-primary rounded-pill py-3 px-5 mt-3 btn-readmore-responsive"
+                        href="{{ url('/about') }}">Lihat Semua tentang Kami</a>
                 </div>
             </div>
         </div>
@@ -250,52 +251,92 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        {{-- <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 07:30 - 14:00
+                        </span> --}}
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
-                            <i class="fa fa-heartbeat text-primary fs-4"></i>
+                            <i class=" fa fa-building text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Poli Umum</h4> {{-- Ubah judul agar lebih spesifik --}}
-                        <p class="mb-4">Melayani pemeriksaan, diagnosis, pengobatan berbagai penyakit umum, serta
-                            konsultasi kesehatan dasar.</p>
+                        <h4 class="mb-3">Klaster 1</h4> {{-- Ubah judul agar lebih spesifik --}}
+                        <ol style="padding-left: 1.5rem; list-style-position: outside;">
+                            <li style="padding-left: 0.5rem;">Pendaftaran.</li>
+                            <li style="padding-left: 0.5rem;">Kasir.</li>
+
+                        </ol>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        {{-- <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 07:30 - 14:00
+                        </span> --}}
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
                             <i class="fa fa-child text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Imunisasi</h4>
-                        <p class="mb-4">Pelayanan kesehatan bagi ibu dan anak-anak, untuk mencegah penyebaran penyakit
-                            yang dapat mengancam kesehatan, seperti campak, polio dan hepatitis.</p>
+                        <h4 class="mb-3">Klaster 2</h4>
+                        <ol style="padding-left: 1.5rem; list-style-position: outside;">
+                            <li style="padding-left: 0.5rem;">Melayani pemeriksaan ibu hamil bersalin dan nifas.</li>
+                            <li style="padding-left: 0.5rem;">Melayani pemeriksaaan kesehatan bayi dan anak balita.</li>
+                            <li style="padding-left: 0.5rem;">Melayani pemeriksaan anak pra-sekolah.</li>
+                            <li style="padding-left: 0.5rem;">Melayani Pemeriksaan anak usia sekolah.</li>
+                            <li style="padding-left: 0.5rem;">Melayani pemeriksaan remaja.</li>
+                        </ol>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        {{-- <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 07:30 - 14:00
+                        </span> --}}
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
-                            <i class="fa fa-tooth text-primary fs-4"></i>
+                            <i class="fa fa-user text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Kesehatan Gigi</h4>
-                        <p class="mb-4">Memberikan perawatan gigi dan mulut untuk mencegah terjadinya masalah kesehatan
-                            gigi yang lebih serius di masa depan</p>
+                        <h4 class="mb-3">Klaster 3</h4>
+                        <ol style="padding-left: 1.5rem; list-style-position: outside;">
+                            <li style="padding-left: 0.5rem;">Melayani pelayanan kesehatan usia dewasa (18-60 tahun).</li>
+                            <li style="padding-left: 0.5rem;">Melayani pelayanan kesehatan usia lanjut (>60 tahun).</li>
+
+                        </ol>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        {{-- <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 07:30 - 14:00
+                        </span> --}}
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
-                            <i class="fa fa-leaf text-primary fs-4"></i>
+                            <i class="fa fa-database text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Kesehatan Lingkungan</h4>
-                        <p class="mb-4">Mengawasi kebersihan lingkungan, sanitasi lingkungan, dan pengawasan penyediaan
-                            air bersih untuk mencegah terjadinya penyakit yang disebabkan oleh lingkungan yang tidak sehat
-                        </p>
+                        <h4 class="mb-3">Klaster 4</h4>
+                        <ol style="padding-left: 1.5rem; list-style-position: outside;">
+
+                            <li style="padding-left: 0.5rem;">Penanggulangan penyakit menular.</li>
+                            <li style="padding-left: 0.5rem;">Kesehatan Lingkungan.</li>
+                            <li style="padding-left: 0.5rem;">Surveilans.</li>
+                        </ol>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item bg-light rounded h-100 p-5">
+                {{-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 07:30 - 14:00
+                        </span>
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
                             <i class="fa fa-shield-alt text-primary fs-4"></i>
@@ -306,7 +347,12 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="service-item bg-light rounded h-100 p-5 position-relative">
+                        <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 07:30 - 14:00
+                        </span>
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                             style="width: 65px; height: 65px;">
                             <i class="fa fa-venus-mars text-primary fs-4"></i>
@@ -316,10 +362,53 @@
                             konseling tentang kesehatan reproduksi untuk membantu ibu dan pasangan dalam merencanakan
                             keluarga dan menjaga kesehatan reproduksi</p>
                     </div>
+                </div> --}}
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item rounded h-100 p-5 position-relative" style="background-color: #d7eef5;">
+                        <span
+                            class="badge bg-secondary text-white position-absolute top-0 end-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Layanan Lintas Klaster
+                        </span>
+                        {{-- <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Senin - Sabtu: 08.00 - 14.00
+                        </span> --}}
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                            style="width: 65px; height: 65px;">
+                            <i class="fa fa-tooth text-primary fs-4"></i>
+                        </div>
+                        <h4 class="mb-3">Kesehatan Gigi dan Mulut</h4>
+                        <p class="mb-4">Melayani pemeriksaan, pengobatan, dan konsultasi kesehatan gigi dan mulut,
+                            termasuk pencabutan, penambalan, dan pembersihan karang gigi.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item rounded h-100 p-5 position-relative" style="background-color: #d7eef5;">
+                        <span
+                            class="badge bg-secondary text-white position-absolute top-0 end-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Layanan Lintas Klaster
+                        </span>
+                        {{-- <span
+                            class="badge bg-primary text-white position-absolute bottom-0 start-0 m-3 rounded-pill py-1 px-2"
+                            style="font-size: 0.75rem;">
+                            Setiap Hari: 24 Jam
+                        </span> --}}
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                            style="width: 65px; height: 65px;">
+                            <i class="fa fa-first-aid text-primary fs-4"></i>
+                        </div>
+                        <h4 class="mb-3">Unit Gawat Darurat (UGD)</h4>
+                        <p class="mb-4">Pelayanan medis darurat 24 jam untuk kondisi yang memerlukan penanganan cepat dan
+                            segera, sebelum rujukan ke rumah sakit.</p>
+                    </div>
                 </div>
                 <div class="text-center mt-5 wow fadeIn" data-wow-delay="0.1s"> {{-- Tambahkan wow fadeIn untuk animasi --}}
-            <a class="btn btn-primary rounded-pill py-3 px-5 mt-1 btn-readmore-responsive" href="{{ url('/about') }}">Lihat Semua Layanan</a>
-        </div>
+                    <a class="btn btn-primary rounded-pill py-3 px-5 mt-1 btn-readmore-responsive"
+                        href="{{ url('/service') }}">Lihat Semua Layanan</a>
+                </div>
             </div>
         </div>
     </div>
@@ -334,11 +423,17 @@
                     <div class="p-lg-5 ps-lg-0">
                         <p class="d-inline-block border rounded-pill text-light py-1 px-4">Fitur Unggulan</p>
                         <h1 class="text-white mb-4">Mengapa Memilih Kami?</h1>
-                        <p class="text-white mb-4 pb-2"><p class="text-white mb-4 pb-2">Puskesmas Banjarwangi berkomitmen memberikan pelayanan kesehatan prima yang didukung oleh fasilitas modern, tenaga ahli, biaya terjangkau, <strong>serta kesiapsiagaan layanan darurat</strong>. Berikut adalah keunggulan utama yang kami tawarkan untuk kesehatan Anda dan keluarga:</p></p>
+                        <p class="text-white mb-4 pb-2">
+                        <p class="text-white mb-4 pb-2">Puskesmas Banjarwangi berkomitmen memberikan pelayanan kesehatan
+                            prima yang didukung oleh fasilitas modern, tenaga ahli, biaya terjangkau, <strong>serta
+                                kesiapsiagaan layanan darurat</strong>. Berikut adalah keunggulan utama yang kami tawarkan
+                            untuk kesehatan Anda dan keluarga:</p>
+                        </p>
                         <div class="row g-4">
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive" style="width: 55px; height: 55px;">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive"
+                                        style="width: 55px; height: 55px;">
                                         <i class="fa fa-user-md text-primary"></i>
                                     </div>
                                     <div class="ms-4">
@@ -349,7 +444,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive" style="width: 55px; height: 55px;">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive"
+                                        style="width: 55px; height: 55px;">
                                         <i class="fa fa-award text-primary"></i>
                                     </div>
                                     <div class="ms-4">
@@ -360,7 +456,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive" style="width: 55px; height: 55px;">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive"
+                                        style="width: 55px; height: 55px;">
                                         <i class="fa fa-coins text-primary"></i>
                                     </div>
                                     <div class="ms-4">
@@ -371,7 +468,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive" style="width: 55px; height: 55px;">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light icon-circle-responsive"
+                                        style="width: 55px; height: 55px;">
                                         <i class="fa fa-phone-alt text-primary"></i>
                                     </div>
                                     <div class="ms-4">
@@ -385,7 +483,8 @@
                 </div>
                 <div class="col-lg-6 pe-lg-0 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="{{ asset('home/img/pkmbjw-3.png') }}" style="object-fit: cover;" alt="">
+                        <img class="position-absolute img-fluid w-100 h-100" src="{{ asset('home/img/pkmbjw-3.png') }}"
+                            style="object-fit: cover;" alt="">
                     </div>
                 </div>
             </div>
@@ -396,41 +495,47 @@
 
     <!-- Team Start -->
     <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block border rounded-pill py-1 px-4">Dokter</p>
-                <h1>Tenaga Medis Berpengalaman</h1>
-            </div>
-            <div class="row g-4">
-                {{-- Loop untuk menampilkan data dokter dari database --}}
-                @forelse($dokters as $dokter)
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item position-relative rounded overflow-hidden">
-                            <div class="overflow-hidden">
-                                @if ($dokter->foto)
-                                    <img class="img-fluid" src="{{ asset('storage/' . $dokter->foto) }}"
-                                        alt="{{ $dokter->nama }}" style="width: 100%; height: 250px; object-fit: cover;">
-                                @else
-                                    <img class="img-fluid" src="https://placehold.co/600x400/cccccc/333333?text=No+Image"
-                                        alt="No Image Available" style="width: 100%; height: 250px; object-fit: cover;">
-                                @endif
-                            </div>
-                            <div class="team-text bg-light text-center p-4">
-                                <h5 class="fs-6">{{ $dokter->nama }}</h5>
-                                <p class="text-primary small fw-normal mb-1">{{ $dokter->profesi }}</p>
-                                <p class="text-muted small fw-normal">{{ $dokter->jadwal }}</p>
-                            </div>
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <p class="d-inline-block border rounded-pill py-1 px-4">Dokter</p>
+            <h1>Tenaga Medis Berpengalaman</h1>
+        </div>
+        <div class="row g-4">
+            {{-- Loop untuk menampilkan hanya 4 dokter dari database --}}
+            @forelse($dokters->take(4) as $dokter)
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item position-relative rounded overflow-hidden">
+                        <div class="overflow-hidden">
+                            @if ($dokter->foto)
+                                <img class="img-fluid" src="{{ asset('storage/' . $dokter->foto) }}"
+                                     alt="{{ $dokter->nama }}" style="width: 100%; height: 250px; object-fit: cover;">
+                            @else
+                                <img class="img-fluid" src="https://placehold.co/600x400/cccccc/333333?text=No+Image"
+                                     alt="No Image Available" style="width: 100%; height: 250px; object-fit: cover;">
+                            @endif
+                        </div>
+                        <div class="team-text bg-light text-center p-4">
+                            <h5 class="fs-6">{{ $dokter->nama }}</h5>
+                            <p class="text-primary small fw-normal mb-1">{{ $dokter->profesi }}</p>
+                            <p class="text-muted small fw-normal">{{ $dokter->jadwal }}</p>
                         </div>
                     </div>
-                @empty
-                    <div class="col-12 text-center py-5">
-                        <p class="lead">Tidak ada data dokter saat ini.</p>
-                    </div>
-                @endforelse
-            </div>
-            </div>
+                </div>
+            @empty
+                <div class="col-12 text-center py-5">
+                    <p class="lead">Tidak ada data dokter saat ini.</p>
+                </div>
+            @endforelse
         </div>
-        
+    </div>
+    
+    {{-- Perbaikan Tombol agar di tengah dan terlihat lebih baik --}}
+    <div class="text-center mt-5 wow fadeIn" data-wow-delay="0.1s"> {{-- Tambahkan wow fadeIn untuk animasi --}}
+                    <a class="btn btn-primary rounded-pill py-3 px-5 mt-1 btn-readmore-responsive"
+                        href="{{ url('/dokter') }}">Lihat Semua Dokter</a>
+                </div>
+</div>
+
     </div>
     <!-- Team End -->
 @endsection

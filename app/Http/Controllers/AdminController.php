@@ -14,6 +14,7 @@ use App\Models\Feedback;
 
 // use PDF; // Pastikan ini ada di atas
 use Barryvdh\DomPDF\Facade\Pdf; // Tambahkan ini jika belum ada
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -493,6 +494,46 @@ public function downloadPdfPoli($id)
         
         return $pdf->download('laporan_kritik_dan_saran.pdf');
     }
+
+
+    public function storeFromChatbot(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'nik' => 'required|digits:16|unique:pengunjungs,nik',
+        'no_kk' => 'required|digits:16',
+        'nama' => 'required|string|max:255',
+        'telepon' => 'required|string|max:20',
+        'alamat' => 'required|string',
+        'keluhan' => 'required|string',
+        'tgl_kunjung' => 'required|date',
+        'poli_id' => 'required|exists:polis,id',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors(),
+        ], 422);
+    }
+
+    $data = $validator->validated();
+
+    // Simpan ke database
+    $pendaftaran = Pengunjung::create($data);
+
+    // Buat pesan interaktif dengan data dinamis
+    $message = "Pendaftaran berhasil!  \n";
+    $message .= "Terima kasih, <b>{$data['nama']}</b>.  \n";
+    $message .= "Tanggal kunjungan: <b>{$data['tgl_kunjung']}</b>  \n";
+    // $message .= "Poli ID: {$data['poli_id']}";
+
+    return response()->json([
+        'success' => true,
+        'message' => $message,
+        'data' => $pendaftaran
+    ]);
+}
+
 
 
 }

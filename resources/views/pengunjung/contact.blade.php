@@ -2,7 +2,6 @@
 
 @section('post')
 
-<!-- Page Header Start -->
 <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
         <h1 class="display-3 text-white mb-3 animated slideInDown text-center">Hubungi Kami</h1>
@@ -14,9 +13,6 @@
         </nav>
     </div>
 </div>
-<!-- Page Header End -->
-
-<!-- Contact Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
@@ -26,8 +22,8 @@
                         <i class="fa fa-map-marker-alt text-primary"></i>
                     </div>
                     <div class="ms-4">
-                        <p class="mb-2">Alamat</p>
-                        <h5 class="mb-0">Kec. Banjarwangi, Garut</h5>
+                        <p class="mb-1 text-secondary">Alamat</p>
+                        <h6 class="mb-0">Kec. Banjarwangi, Garut</h6>
                     </div>
                 </div>
             </div>
@@ -37,8 +33,8 @@
                         <i class="fa fa-phone-alt text-primary"></i>
                     </div>
                     <div class="ms-4">
-                        <p class="mb-2">Call Us Now</p>
-                        <h5 class="mb-0">+062 345 6789 654</h5>
+                        <p class="mb-1 text-secondary">Hubungi Kami</p>
+                        <h6 class="mb-0">+62 821-1717-5388</h6>
                     </div>
                 </div>
             </div>
@@ -48,22 +44,33 @@
                         <i class="fa fa-envelope-open text-primary"></i>
                     </div>
                     <div class="ms-4">
-                        <p class="mb-2">Mail Us Now</p>
-                        <h5 class="mb-0">pkmbjw@gmail.com</h5>
+                        <p class="mb-1 text-secondary">Email</p>
+                        <h6 class="mb-0">laporpkmbanjarwangi@gmail.com</h6>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="row g-5 mt-4"> <!-- Tambahkan margin atas -->
+
+        {{-- Tambahan Tautan Media Sosial --}}
+        <div class="row g-4 mt-4 justify-content-center">
+            <div class="col-12 text-center">
+                <h4 class="mb-3">Ikuti Kami di Media Sosial</h4>
+                <a class="btn btn-outline-primary btn-social" href="https://web.facebook.com/puskesmas.banjarwangi.2025"><i
+                                class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-outline-primary btn-social" href="https://www.instagram.com/puskesmasbanjarwangi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i
+                                class="fab fa-instagram"></i></a>
+                <a class="btn btn-outline-primary btn-social" href="https://youtube.com/@pkmbanjarwangichannel3751?si=MzDwVJ1nNYyEt1wN"><i
+                                class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="row g-5 mt-4">
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <h1 class="mb-4">Kritik dan Saran</h1>
                 <p class="mb-4">Kami sangat menghargai masukan Anda. Silakan sampaikan kritik, saran, atau pertanyaan Anda melalui formulir di bawah ini.</p>
 
-                <!-- Formulir Kritik dan Saran -->
                 <form method="POST" action="{{ route('contact.submit') }}">
                     @csrf
-                    
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
@@ -119,8 +126,6 @@
         </div>
     </div>
 </div>
-<!-- Contact End -->
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const textarea = document.getElementById('pesan');

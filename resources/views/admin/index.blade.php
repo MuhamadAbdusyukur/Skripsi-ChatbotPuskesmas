@@ -49,7 +49,7 @@
                         placeholder="Cari NIK/Nama/Alamat/Poli/Tanggal..." value="{{ request('search') }}">
                     <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-search me-2"></i> Cari</button>
                     @if (request('search'))
-                        <a href="{{ route('admin') }}" class="btn btn-outline-secondary btn-sm ms-2">Reset</a>
+                        <a href="{{ route('admin.index') }}" class="btn btn-outline-secondary btn-sm ms-2">Reset</a>
                     @endif
                 </form>
             </div>

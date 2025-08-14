@@ -50,9 +50,9 @@
                     </div>
                 @endforelse
             </div>
-            </div>
         </div>
-        
+    </div>
+
     </div>
     <!-- Team End -->
 @endsection
