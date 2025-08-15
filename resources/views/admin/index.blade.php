@@ -13,7 +13,7 @@
 
     <div class="col-12">
         <div class="bg-light rounded p-4">
-            <h6 class="mb-4">DATA PENDAFTARAN PASIEN</h6>
+            <h6 class="mb-4">DATA PRA-PENDAFTARAN PASIEN</h6>
 
             {{-- mencari role --}}
             {{-- <div class="row g-4">
@@ -46,7 +46,7 @@
             <div class="d-flex justify-content-end align-items-center mb-3 responsive-search-container">
                 <form action="{{ route('admin.index') }}" method="GET" class="d-flex my-search-form flex-grow-1">
                     <input type="text" name="search" class="form-control me-2 my-search-input"
-                        placeholder="Cari NIK/Nama/Alamat/Poli/Tanggal..." value="{{ request('search') }}">
+                        placeholder="Cari NIK, nama, atau alamat..." value="{{ request('search') }}">
                     <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-search me-2"></i> Cari</button>
                     @if (request('search'))
                         <a href="{{ route('admin.index') }}" class="btn btn-outline-secondary btn-sm ms-2">Reset</a>

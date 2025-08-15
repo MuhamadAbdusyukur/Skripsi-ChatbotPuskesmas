@@ -59,13 +59,18 @@
                     {{-- <a href="{{ url('/admin/datacreate') }}" class="nav-item nav-link {{ ($title === "Data Pasien" ? 'active' : '')}}"><i class="fa fa-table me-2"></i>Tambah Pasien</a> --}}
                     <a href="{{ url('/admin/laporan') }}"
                         class="nav-item nav-link {{ $title === 'Data Pengunjung' ? 'active' : '' }}"><i
-                            class="fa fa-chart-bar me-2"></i>Data Pengunjung</a>
+                            class="fa fa-chart-bar me-2"></i>Pra-Pendaftaran</a>
                     {{-- <a href="{{ url('/admin/poli') }}"
                         class="nav-item nav-link {{ $title === 'Pelayanan Poli' ? 'active' : '' }}"><i
                             class="fa fa-th me-2"></i>Pelayanan Poli</a> --}}
-                    <a href="{{ url('/admin/user') }}"
-                        class="nav-item nav-link {{ $title === 'Daftar Pengguna' ? 'active' : '' }}"><i
-                            class="fa fa-user me-2"></i>Daftar Pengguna</a>
+                
+                            @if(auth()->check() && auth()->user()->role === 'super_admin')
+<a href="{{ url('/admin/user') }}"
+   class="nav-item nav-link {{ $title === 'Daftar Pengguna' ? 'active' : '' }}">
+   <i class="fa fa-user me-2"></i>Kelola Pengguna
+</a>
+@endif
+
                     <a href="{{ url('/qna') }}"
                         class="nav-item nav-link {{ $title === 'Kelola Chatbot' ? 'active' : '' }}"><i
                             class="fa fa-comments me-2"></i>Kelola Chatbot</a>
@@ -106,7 +111,7 @@
                             <span class="d-none d-lg-inline-flex">Hi, {{ $user->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{ route('user.edit', $user->id) }}" class="dropdown-item">My Profile</a>
+                            <a href="{{ route('user.edit', $user->id) }}" class="dropdown-item">My Profil</a>
                             <a href="{{ url('/logout') }}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

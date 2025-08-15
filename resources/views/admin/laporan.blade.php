@@ -6,7 +6,7 @@
     <div class="row g-4">
         <div class="col-12">
             <div class="bg-light rounded h-100 main-card-padding">
-                <h6 class="mb-4">DATA PENGUNJUNG</h6>
+                <h6 class="mb-4">DATA PRA-PENDAFTARAN</h6>
                 {{-- TAB NAVIGATION --}}
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -30,7 +30,7 @@
                         {{-- FORM PENCARIAN TANGGAL --}}
                         <div class="d-flex justify-content-end mb-3 responsive-search-container">
                             <form action="{{ route('admin.laporan') }}" method="GET" class="d-flex my-search-form">
-                                <input type="text" name="search_date" class="form-control form-control-sm me-2 my-search-input" 
+                                <input type="date" name="search_date" class="form-control form-control-sm me-2 my-search-input" 
                                        placeholder="Cari Tanggal..." value="{{ request('search_date') }}">
                                 <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-search me-1"></i> Cari</button>
                                 @if(request('search_date'))

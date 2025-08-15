@@ -398,7 +398,7 @@
 
 
     <!-- Topbar Start -->
-    {{-- <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="row gx-0 d-none d-lg-flex">
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
@@ -407,27 +407,25 @@
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Sen - Min : 08.00 - 15.00</small>
+                    <small>Senin - Sabtu : Buka, Minggu : Tutup</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+012 345 6789</small>
+                    <small>+62 821-1717-5388</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://web.facebook.com/puskesmas.banjarwangi.2025" target="_blank"><i
                             class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href=""><i
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://www.instagram.com/puskesmasbanjarwangi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i
                             class="fab fa-instagram"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://youtube.com/@pkmbanjarwangichannel3751?si=MzDwVJ1nNYyEt1wN" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Topbar End -->
 
 

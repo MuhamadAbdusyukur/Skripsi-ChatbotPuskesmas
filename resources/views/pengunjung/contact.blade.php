@@ -55,11 +55,11 @@
         <div class="row g-4 mt-4 justify-content-center">
             <div class="col-12 text-center">
                 <h4 class="mb-3">Ikuti Kami di Media Sosial</h4>
-                <a class="btn btn-outline-primary btn-social" href="https://web.facebook.com/puskesmas.banjarwangi.2025"><i
+                <a class="btn btn-outline-primary btn-social" href="https://web.facebook.com/puskesmas.banjarwangi.2025" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-outline-primary btn-social" href="https://www.instagram.com/puskesmasbanjarwangi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i
+                <a class="btn btn-outline-primary btn-social" href="https://www.instagram.com/puskesmasbanjarwangi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i
                                 class="fab fa-instagram"></i></a>
-                <a class="btn btn-outline-primary btn-social" href="https://youtube.com/@pkmbanjarwangichannel3751?si=MzDwVJ1nNYyEt1wN"><i
+                <a class="btn btn-outline-primary btn-social" href="https://youtube.com/@pkmbanjarwangichannel3751?si=MzDwVJ1nNYyEt1wN" target="_blank"><i
                                 class="fab fa-youtube"></i></a>
             </div>
         </div>

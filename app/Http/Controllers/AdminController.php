@@ -312,20 +312,41 @@ class AdminController extends Controller
 
     public function userstore(Request $request)
 {
-    // --- PERBAIKAN: Simpan hasil validasi ke variabel ---
-    $validatedData = $request->validate([ // Simpan hasil validasi ke variabel $validatedData
+    // --- Langkah 1: Perbarui aturan validasi ---
+    // Hapus validasi "in" untuk role agar nilai dari UI bisa lolos
+    $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email',
         'password' => 'required|string|min:8',
-        'role' => 'required|string|in:admin,super_admin',
+        'role' => 'required|string', // Aturan validasi role sekarang lebih fleksibel
     ]);
-    // ---------------------------------------------------
 
-    $validatedData['password'] = bcrypt($validatedData['password']); // Gunakan $validatedData untuk password
+    // --- Langkah 2: Tambahkan logika terjemahan ---
+    // Buat variabel untuk menyimpan role yang akan masuk ke database
+    $databaseRole = '';
+
+    // Lakukan pengecekan dan terjemahan dari nilai UI
+    if ($validatedData['role'] === 'Kepala Puskesmas') {
+        $databaseRole = 'super_admin';
+    } elseif ($validatedData['role'] === 'Staf Administrasi') {
+        $databaseRole = 'admin';
+    } else {
+        // Tambahkan penanganan error jika role tidak valid
+        // Anda bisa mengembalikan error atau menetapkan default
+        $databaseRole = 'default_role'; // Ganti dengan role default jika perlu
+    }
+
+    // --- Langkah 3: Siapkan data untuk disimpan ---
+    // Enkripsi password
+    $validatedData['password'] = bcrypt($validatedData['password']);
     
-    User::create($validatedData); // Gunakan $validatedData untuk membuat user
+    // Ganti nilai role dengan nilai yang sudah diterjemahkan
+    $validatedData['role'] = $databaseRole;
 
+    // --- Langkah 4: Simpan data ke database ---
+    User::create($validatedData);
 
+    // --- Langkah 5: Redirect atau kembalikan response ---
     return redirect('/admin/user')->with('success', 'Pengguna berhasil ditambahkan!');
 }
 

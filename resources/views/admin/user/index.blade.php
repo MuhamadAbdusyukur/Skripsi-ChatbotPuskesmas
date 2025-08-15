@@ -18,10 +18,10 @@
                 <div class="bg-light rounded h-100 main-card-padding">
                     {{-- JUDUL DAN TOMBOL TAMBAH (SEJAJAR) --}}
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h6 class="mb-0">DAFTAR ADMIN</h6>
+                        <h6 class="mb-0">DAFTAR PENGGUNA</h6>
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="collapse"
                             data-bs-target="#tambahAdminForm" aria-expanded="false" aria-controls="tambahAdminForm">
-                            <i class="fas fa-plus me-2"></i> Tambah Admin
+                            <i class="fas fa-plus me-2"></i>Tambah
                         </button>
                     </div>
 
@@ -75,22 +75,18 @@
 
                                     <div class="col-12"> {{-- Buat full-width di kolom parent --}}
                                         <div class="form-floating">
-                                            <select name="role" id="role"
-                                                class="form-select @error('role') is-invalid @enderror" required>
-                                                <option value="" selected disabled>Pilih Peran</option>
-                                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin
-                                                </option>
-                                                <option value="super_admin"
-                                                    {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin
-                                                </option>
-                                            </select>
-                                            <label for="role">Peran (Role)</label>
-                                            @error('role')
-                                                <span class="invalid-feedback" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
+    <select name="role" id="role" class="form-select @error('role') is-invalid @enderror" required>
+        <option value="" selected disabled>Pilih Peran</option>
+        <option value="Kepala Puskesmas" {{ old('role') == 'Kepala Puskesmas' ? 'selected' : '' }}>Kepala Puskesmas</option>
+        <option value="Staf Administrasi" {{ old('role') == 'Staf Administrasi' ? 'selected' : '' }}>Staf Administrasi</option>
+    </select>
+    <label for="role">Peran (Role)</label>
+    @error('role')
+        <span class="invalid-feedback" role="alert">
+            {{ $message }}
+        </span>
+    @enderror
+</div>
                                     </div>
 
                                     <div class="col-12">
@@ -107,10 +103,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">NAMA</th>
-                                    <th scope="col">EMAIL</th>
-                                    <th scope="col">ROLE</th>
-                                    <th scope="col">AKSI</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
