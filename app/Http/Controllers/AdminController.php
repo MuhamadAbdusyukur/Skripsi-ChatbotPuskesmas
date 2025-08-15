@@ -72,7 +72,7 @@ class AdminController extends Controller
             'telepon' => 'required|numeric',
             'alamat' => 'required',
             'tgl_kunjung' => 'required|date',
-            'poli_id' => 'required',
+            'poli_id' => 'nullable',
         ]);
 
         Pengunjung::create([
@@ -105,7 +105,7 @@ class AdminController extends Controller
             'nama' => 'required',
             'alamat' => 'required',
             'telepon' => 'required',
-            'poli_id' => 'required',
+            'poli_id' => 'nullable',
             'tgl_kunjung' => 'required|date',
         ]);
 
@@ -527,7 +527,7 @@ public function downloadPdfPoli($id)
         'alamat' => 'required|string',
         'keluhan' => 'required|string',
         'tgl_kunjung' => 'required|date',
-        'poli_id' => 'required|exists:polis,id',
+        'poli_id' => 'nullable'  //required|exists:polis,id',
     ]);
 
     if ($validator->fails()) {

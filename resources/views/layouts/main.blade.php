@@ -554,14 +554,14 @@
             </div>
 
             {{-- Tombol pendaftaran --}}
-<a href="{{ url('/pendaftaran') }}" class="btn btn-primary rounded-0 py-4 px-lg-4 d-none d-lg-block">
+{{-- <a href="{{ url('/pendaftaran') }}" class="btn btn-primary rounded-0 py-4 px-lg-4 d-none d-lg-block">
     Pra-Pendaftaran<i class="fa fa-arrow-right ms-3"></i>
 </a>
 <a href="{{ url('/pendaftaran') }}"
     class="btn btn-primary rounded-0 d-block d-lg-none d-flex justify-content-center align-items-center text-center"
     style="height: 50px;">
     Daftar Sekarang<i class="fa fa-arrow-right ms-2"></i>
-</a>
+</a> --}}
         </div>
     </nav>
 
@@ -1557,11 +1557,12 @@ body.chatbot-open::before {
                   oninput="this.setCustomValidity('')">
 
             <label>Pilih Poli:</label>
-            <select id="poli_id">
-                @foreach($poli as $p)
-                    <option value="{{ $p->id }}">{{ $p->nama }}</option>
-                @endforeach
-            </select>
+<select id="poli_id" name="poli_id">
+    <option value="">-- Pilih Poli (Opsional) --</option>
+    @foreach($poli as $p)
+        <option value="{{ $p->id }}">{{ $p->nama }}</option>
+    @endforeach
+</select>
 
             <button type="submit">Daftar</button>
         </form>
