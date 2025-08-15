@@ -1705,7 +1705,7 @@ document.getElementById('pendaftaranForm').addEventListener('submit', function(e
         poli_id: document.getElementById('poli_id').value
     };
 
-    fetch('/chatbot/daftar-pasien', {
+    fetch('/public/chatbot/daftar-pasien', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
