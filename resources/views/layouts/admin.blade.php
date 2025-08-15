@@ -60,9 +60,9 @@
                     <a href="{{ url('/admin/laporan') }}"
                         class="nav-item nav-link {{ $title === 'Data Pengunjung' ? 'active' : '' }}"><i
                             class="fa fa-chart-bar me-2"></i>Pra-Pendaftaran</a>
-                    <a href="{{ url('/admin/poli') }}"
+                    {{-- <a href="{{ url('/admin/poli') }}"
                         class="nav-item nav-link {{ $title === 'Pelayanan Poli' ? 'active' : '' }}"><i
-                            class="fa fa-th me-2"></i>Pelayanan Poli</a>
+                            class="fa fa-th me-2"></i>Pelayanan Poli</a> --}}
                 
                             @if(auth()->check() && auth()->user()->role === 'super_admin')
 <a href="{{ url('/admin/user') }}"
